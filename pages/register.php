@@ -85,7 +85,7 @@
                     username : {
                         required : true,
                         rangelength : [6, 20],
-                        remote : "check/auth_check.php"
+                        remote : "check/reg_check.php"
                     },
                     password : {
                         required : true,
