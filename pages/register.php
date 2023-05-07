@@ -130,7 +130,7 @@
                         url : "action/auth_action.php",
                         data : $(form).serializeArray(),
                         success: function (data) {
-                            window.location = "http://localhost/php-travelvn/pages/login";
+                            window.location = "../pages/login";
                         }
                     });
                 }

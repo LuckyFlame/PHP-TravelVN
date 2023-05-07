@@ -35,7 +35,8 @@
                 <img src="../assets/images/logo.png" alt="" width="40" height="40">
                 <span class="logo-title">TravelVN</span>
             </span>
-            <form class="form" id="form-login">
+            <form action="../pages/login.php" class="form" id="form-login" enctype="multipart/form-data">
+                <div class="req-data"></div>
                 <div class="field">
                     <div class="input-field user-field">
                         <input type="text" placeholder="Nhập Tài Khoản" class="input" name="username">
@@ -61,7 +62,7 @@
                 </div>
                 <div class="input-field button">
                     <!-- <input type="submit" value="Đăng Nhập" class="input"> -->
-                    <button type="submit">Đăng Nhập</button>
+                    <button type="submit" name="action" value="login">Đăng Nhập</button>
                 </div>
                 <div class="create-account">
                     <span>Bạn chưa có tài khoản? <a href="../pages/register">Đăng ký</a></span>
@@ -84,25 +85,35 @@
                 rules : {
                     username : {
                         required : true,
-                        rangelength : [6, 20],
+                        // rangelength : [6, 20],
                     },
                     password : {
                         required : true,
-                        rangelength : [6, 30],
+                        // rangelength : [6, 30],
                     }
                 }, 
                 messages: {
                     username : {
                         required : "*Bạn Chưa Nhập Tài Khoản",
-                        rangelength: "*Tài Khoản Chỉ Nhận Từ 6 Đến 20 Ký Tự"
+                        // rangelength: "*Tài Khoản Chỉ Nhận Từ 6 Đến 20 Ký Tự"
                     },
                     password : {
                         required : "*Bạn Chưa Nhập Mật Khẩu",
-                        rangelength : "*Mật Khẩu Chỉ Nhận Từ 6 Đến 30 Ký Tự"
+                        // rangelength : "*Mật Khẩu Chỉ Nhận Từ 6 Đến 30 Ký Tự"
                     }
                 },
                 submitHandler: function(form) {
                     // form.submit();
+                    // console.log($(form).serializeArray());
+
+                    $.ajax({
+                        type : "POST",
+                        url : "action/auth_action.php",
+                        data : $(form).serializeArray(),
+                        success: function (data) {
+                            $(".req-data").html(data);
+                        }
+                    });
                 }
             });
         })(jQuery);

@@ -6,7 +6,6 @@ include("/xampp/htdocs/php-travelvn/classes/auth.php");
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 // print_r($_POST);
-$error = false;
 
 if(!empty($_POST["action"])) {
     
@@ -37,10 +36,21 @@ if(!empty($_POST["action"])) {
 
     // Login
     if($action == "login") {
+        $username = $_POST["username"];
+        $password = $_POST["password"];
 
+        $checkAccount = Auth::ByUsername($username);        
+
+        if($checkAccount == false) {
+            echo "*Tài Khoản Không Tồn Tại";
+        } else {
+            if($checkAccount["password"] != password_verify($password, $checkAccount["password"])) {
+                echo "*Mật Khẩu Không Đúng";
+            } else {
+                
+            }
+        }
     }
 }
-
-
 
 ?>

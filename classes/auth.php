@@ -18,11 +18,6 @@ Class Auth {
         $this->update_at = $update_at;
     }
 
-
-    public static function Login() {
-
-    }
-
     public static function ByUsername($username) {
         $connect = connectDB();
 

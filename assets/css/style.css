@@ -326,6 +326,12 @@ body {
     font-size: 0.85rem;
 }
 
+.section-login .container .form .req-data {
+    color: var(--fc-red);
+    padding: 2px 0;
+    font-size: 0.85rem;
+}
+
 /* .section-login .container .form .error {
     color: var(--fc-red);
 } */
