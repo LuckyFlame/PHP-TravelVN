@@ -47,7 +47,22 @@ if(!empty($_POST["action"])) {
             if($checkAccount["password"] != password_verify($password, $checkAccount["password"])) {
                 echo "*Mật Khẩu Không Đúng";
             } else {
-                
+                session_start();
+                if($checkAccount["role"] == 0) {
+                    $_SESSION["user"] = $username;
+                    ?>
+                        <script type="text/javascript">
+                            window.location = "../pages/user/index";
+                        </script>
+                    <?php
+                } else if($checkAccount["role"] == 1) {
+                    $_SESSION["admin"] = $username;
+                    ?>
+                        <script type="text/javascript">
+                            window.location = "../pages/admin/index";
+                        </script>
+                    <?php
+                }
             }
         }
     }
