@@ -66,6 +66,21 @@ if(!empty($_POST["action"])) {
             }
         }
     }
+
+    if($action == "save-profile") {
+        // print_r($_POST);
+        $id = $_POST["id"];
+        $fullname = $_POST["fullname"];
+        $email = $_POST["email"];
+        $phone = $_POST["phone"];
+        $dob = $_POST["dob"];
+        $gender = $_POST["gender"];
+
+        $update_at = date('j/n/Y - g:i a');
+
+        $create_auth = new Auth("", "", "", $fullname, $email, $phone, $gender, $dob, "", $update_at);
+        Auth::Update($id, $create_auth);
+    }
 }
 
 ?>

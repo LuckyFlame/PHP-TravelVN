@@ -4,20 +4,6 @@
     include("/xampp/htdocs/php-travelvn/library/database.php");
     include("/xampp/htdocs/php-travelvn/classes/auth.php");
 
-    if(isset($_SESSION["user"])) {
-        if(!empty($_GET["id"])) {
-            $user = $_SESSION["user"];
-            $id = $_GET["id"];
-
-            if($id != str_replace("=", "", base64_encode($user))) {
-                die("*Lỗi Khác ID Đăng Nhập Mà Bạn Đăng Nhập");
-            } else {
-    
-            }
-        } else {
-            die("*Lỗi Bỏ Trống ID");
-        }
-    }
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +27,23 @@
 
     <?php 
         include("../includes/user/header.php");
+
+
+        if(isset($_SESSION["user"])) {
+            if(!empty($_GET["id"])) {
+                $user = $_SESSION["user"];
+                $id = $_GET["id"];
+    
+                if($id != str_replace("=", "", base64_encode($user))) {
+                    
+                } else {
+                    $getAuth = Auth::ByProfile($user);
+                }
+    
+            } else {
+                
+            }
+        }
     ?>
 
     <!-- Section Profile -->
@@ -50,39 +53,39 @@
                 <div class="col-md-4 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                         <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" class="rounded-circle mt-5" width="90">
-                        <span class="h5 font-weight-bold mt-1 mb-1">user1234</span>
-                        <span class="">user1234@gmail.com</span>
+                        <span class="h5 font-weight-bold mt-1 mb-1"><?php echo $getAuth["username"]; ?></span>
+                        <span class=""><?php echo $getAuth["email"] ?></span>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <a href="" class="d-flex flex-row align-items-center link back">
+                            <a href="../user/index" class="d-flex flex-row align-items-center link back">
                                 <i class="bx bx-horizontal-left mr-1 mb-1"></i>
                                 <h6>Trở về trang chủ</h6>
                             </a>
                             <h6>Cập Nhật Thông Tin</h6>
                         </div>
-                        <form class="form" id="form-profile">
+                        <form action="../user/profile.php" method="POST" class="form" id="form-profile" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6 mt-3 pr-md-1">
-                                    <input type="text" class="input" placeholder="Họ Tên">
+                                    <input type="text" class="input" name="fullname" placeholder="Họ Tên" value="<?php echo $getAuth["fullname"] ?>">
                                 </div>
                                 <div class="col-md-6 mt-3 pl-md-1">
-                                    <input type="text" class="input" placeholder="Email">
+                                    <input type="text" class="input" name="email" placeholder="Email" value="<?php echo $getAuth["email"] ?>">
                                 </div>
                                 <div class="col-md-6 mt-3 pr-md-1">
-                                    <input type="text" class="input" placeholder="Số Điện Thoại">
+                                    <input type="text" class="input" name="phone" placeholder="Số Điện Thoại" value="<?php echo $getAuth["phone"] ?>">
                                 </div>
                                 <div class="col-md-6 mt-3 pl-md-1">
-                                    <input type="text" class="input input-datepicker" placeholder="Ngày Sinh">
+                                    <input type="text" class="input input-datepicker" name="dob" placeholder="Ngày Sinh" value="<?php echo $getAuth["dob"] ?>">
                                 </div>
                                 <div class="col-md-6 mt-3 pr-md-1">
                                     <div class="select-menu">
-                                        <div class="select-button">
-                                            <span class="select-title">Giới Tính</span>
+                                        <div class="select-button hasActive">
+                                            <span class="select-title"><?php echo (empty($getAuth["gender"])) ? "Khác" : $getAuth["gender"] ?></span>
                                             <i class="bx bx-chevron-down"></i>
-                                            <input type="text" class="input-gender" value="" hidden>
+                                            <input type="text" class="input-gender" name="gender" value="<?php echo (empty($getAuth["gender"])) ? "" : $getAuth["gender"] ?>" hidden>
                                         </div>
                                         <ul class="select-option" role-style="none">
                                             <li>
@@ -97,9 +100,12 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <div class="col-md-6 mt-3 pl-md-1 d-none">
+                                    <input type="text" class="input" name="id" placeholder="Mã ID" value="<?php echo $getAuth["id"] ?>">
+                                </div>
                             </div>
                             <div class="mt-5 text-right">
-                                <button class="btn btn-primary profile-button">Lưu Thông Tin</button>
+                                <button type="submit" class="btn btn-primary profile-button" name="action" value="save-profile">Lưu Thông Tin</button>
                             </div>
                         </form>
                     </div>
@@ -112,5 +118,47 @@
     <?php 
         include("../includes/script.php");
     ?>
+
+    <script type="text/javascript">
+        (function($) {
+            $("#form-profile").validate({
+                rules : {
+                    phone : {
+                        required : true,
+                        number : true,
+                        rangelength : [10, 10],
+                    },
+                    email : {
+                        required : true,
+                        email : true,
+                    }
+                }, 
+                messages: {
+                    phone : {
+                        required : "*Số Điện Thoại Không Được Bỏ Trống",
+                        number : "*Số Điện Thoại Phải Là Ký Số",
+                        rangelength : "*Số Điện Thoại Phải Đủ 10 Ký Số"
+                    },
+                    email : {
+                        required : "*Email Không Được Bỏ Trống",
+                        email : "*Email Không Đúng Định Dạng",
+                    }
+                },
+                submitHandler: function(form) {
+                    // form.submit();
+                    // console.log($(form).serializeArray());
+
+                    $.ajax({
+                        type : "POST",
+                        url : "../action/auth_action.php",
+                        data : $(form).serializeArray(),
+                        success: function (data) {
+                            window.location = window.location.href;
+                        }
+                    });
+                }
+            });
+        })(jQuery);
+    </script>
 </body>
 </html>

@@ -55,9 +55,44 @@ Class Auth {
 
         $result = $connect->query($sql_account);
         $result = $connect->query($sql_profile);
-
         $connect->close();
         return $result;
+    }
+
+    public static function Update($id, Auth $auth) {
+        $connect = connectDB();
+
+        $sql = "UPDATE `profile` SET `fullname` = '$auth->fullname', `email` = '$auth->email', `phone` = '$auth->phone', `gender` = '$auth->gender', `dob` = '$auth->dob', `update_at` = '$auth->update_at' WHERE `profile`.`id` = '$id'";
+
+        $result = $connect->query($sql);
+        $connect->close();
+        return $result;
+    }
+
+    public static function ByProfile($username) {
+        $connect = connectDB();
+
+        // SQL
+        $sql = "SELECT * FROM `profile` WHERE `username` = '$username'";
+
+        // Get Result
+        $result = $connect->query($sql);
+
+        if ($result === false) {
+
+        } else {
+            $array = array();
+
+            while ($row = $result->fetch_assoc()) {
+                $array = $row;
+            }
+            // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            //     $array = $row;
+            // }
+        }
+
+        $connect->close();
+        return $array;
     }
 
 }

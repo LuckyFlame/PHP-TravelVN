@@ -29,6 +29,13 @@
     --ff-owald: 'Oswald', sans-serif;
     --ff-poppins: 'Poppins', sans-serif;
     --ff-bruno: 'Bruno Ace SC', cursive;
+
+    /* Transition */
+    --transition-02: all 0.2s ease;
+    --transition-03: all 0.3s ease;
+    --transition-04: all 0.4s ease;
+    --transition-05: all 0.5s ease;
+
 }
 
 * {
@@ -346,6 +353,10 @@ body {
 } */
 
 /* Profile */
+.section-profile .container {
+    max-width: 1200px;
+}
+
 .section-profile .form .input {
     display: block;
     width: 100%;
@@ -412,5 +423,27 @@ body {
 
 .section-profile .form .select-menu .select-option li:hover {
     background: var(--fc-light-gray);
-} 
+}
+
+.section-profile .form label.error {
+    color: var(--fc-red);
+    padding: 2px 0;
+    font-size: 0.85rem;
+}
+
+.section-profile .form .col-md-6 {
+    position: relative;
+    width: 100%;
+    height: 65px;
+}
+
+/* Dashboard */
+
+
 /* Media */
+
+@media (min-width: 1200px) {
+    .section-profile .container {
+        max-width: 1200px !important;
+    }
+}
