@@ -10,6 +10,7 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+ /* 
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -43754,6 +43755,8 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
   * @author Mattia Larentis <mattia@larentis.eu> (http://larentis.eu)
   * @license MIT
   */
+
+/*
 .bootstrap-switch {
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
@@ -53010,5 +53013,5 @@ a.text-muted:hover {
 
 .dark-mode .border-dark {
   border-color: #4b545c !important;
-}
+} */
 /*# sourceMappingURL=adminlte.css.map */
