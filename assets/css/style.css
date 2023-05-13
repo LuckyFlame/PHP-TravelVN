@@ -438,12 +438,32 @@ body {
 }
 
 /* Dashboard */
+.main-sidebar .logo-img {
+    opacity: 0.8;
+}
 
+.main-sidebar .logo-text {
+    font-family: var(--ff-bruno) !important;
+    font-weight: 500;
+    font-size: 1.15rem;
+}
+
+.main-sidebar .nav-sidebar .nav-header {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
 
 /* Media */
 
 @media (min-width: 1200px) {
     .section-profile .container {
         max-width: 1200px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .small-box p {
+        font-size: 1rem;
     }
 }
