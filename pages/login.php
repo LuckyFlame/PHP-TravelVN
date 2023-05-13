@@ -32,7 +32,7 @@
     <section class="section-login">
         <div class="container">
             <span class="title">
-                <img src="../assets/images/logo.png" alt="" width="40" height="40">
+                <img src="../assets/img/logo.png" alt="" width="40" height="40">
                 <span class="logo-title">TravelVN</span>
             </span>
             <form action="../pages/login.php" class="form" id="form-login" enctype="multipart/form-data">

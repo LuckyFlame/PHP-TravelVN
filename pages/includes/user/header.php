@@ -2,7 +2,7 @@
 <header class="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand">
-            <img src="/php-travelvn/assets/images/logo.png" alt="" width="40" height="40">
+            <img src="/php-travelvn/assets/img/logo.png" alt="" width="40" height="40">
             <span class="logo-title">TravelVN</span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false">

@@ -31,7 +31,7 @@
     <section class="section-register">
         <div class="container">
             <span class="title">
-                <img src="../assets/images/logo.png" alt="" width="40" height="40">
+                <img src="../assets/img/logo.png" alt="" width="40" height="40">
                 <span class="logo-title">TravelVN</span>
             </span>
             <form action="../pages/register.php" class="form" id="form-register" method="POST" enctype="multipart/form-data">
