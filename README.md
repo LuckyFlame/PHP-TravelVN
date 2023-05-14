@@ -1,14 +1,14 @@
 # PHP-TravelVN
 
-- Batch No: T1.2008.A0
-- Center Name: ACE-HCMC-2-FPT
-- Project Title: DL3M
+- Lớp: T1.2008.A0
+- Tên Trung Tâm: ACE-HCMC-2-FPT
+- Tên Dự Án: DL3M
 - Frontend: HTML5/CSS/JavaScript
 - Backend: PHP
 
-__________Group 4__________
+__________Nhóm 4__________
 
-4 Collaborators:
+4 Cộng Tác Viên:
 
 - [Dev/Design] - Dương Hòa Long / ID: Student1275060 / Mail: Hoalong1812020@gmail.com
 - [L/Dev/Support] - Phạm Quốc Thắng / ID: Student1273525 / Mail: tymax2021@gmail.com
@@ -17,5 +17,5 @@ __________Group 4__________
 
 _____________________________
 
-- Document:
-- Published:
+- Tài Liệu:
+- Được Phát Hành:
