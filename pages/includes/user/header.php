@@ -10,7 +10,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="/php-travelvn/pages/user/index" class="nav-link">Trang Chủ</a>
                 </li>
                 <li class="nav-item">

@@ -1,5 +1,5 @@
 <!-- Favicons -->
-<link rel="icon" type="image/x-icon" href="/php-travelvn/assets/images/logo.png">
+<link rel="icon" type="image/x-icon" href="/php-travelvn/assets/img/logo.png">
 <!-- Boxicons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 <!-- Bootstrap 4 -->
@@ -11,4 +11,4 @@
 <script type="text/javascript" src="/php-travelvn/assets/js/loader.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <!-- Script Ajax Bootstrap -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->

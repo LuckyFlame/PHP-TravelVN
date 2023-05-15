@@ -48,7 +48,7 @@
 
     <!-- Section Profile -->
     <section class="section section-profile">
-        <div class="container rounded bg-light mt-5">
+        <div class="container rounded mt-5 card-profile card">
             <div class="row">
                 <div class="col-md-4 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -78,7 +78,7 @@
                                     <input type="text" class="input" name="phone" placeholder="Số Điện Thoại" value="<?php echo $getAuth["phone"] ?>">
                                 </div>
                                 <div class="col-md-6 mt-3 pl-md-1">
-                                    <input type="text" class="input input-datepicker" name="dob" placeholder="Ngày Sinh" value="<?php echo $getAuth["dob"] ?>">
+                                    <input type="text" class="input input-datepicker" name="dob" placeholder="Ngày Sinh" value="<?php echo $getAuth["dob"] ?>" readonly>
                                 </div>
                                 <div class="col-md-6 mt-3 pr-md-1">
                                     <div class="select-menu">

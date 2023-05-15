@@ -357,6 +357,10 @@ body {
     max-width: 1200px;
 }
 
+/* .section-profile  .card-profile {
+   
+} */
+
 .section-profile .form .input {
     display: block;
     width: 100%;
@@ -392,9 +396,9 @@ body {
 
 .section-profile .form .select-menu .select-option {
     position: relative;
-    margin-top: 10px;
+    margin-top: 0;
     background: var(--fc-white);
-    padding: 0.375rem 0.75rem;
+    /* padding: 0.375rem 0.75rem; */
     border-radius: 6px;
     border: 1px solid var(--fc-light-gray);
     display: none;
@@ -406,7 +410,7 @@ body {
 
 .section-profile .form .select-menu .select-option li {
     padding: 0.375rem 0.75rem;
-    border-radius: 6px;
+    /* border-radius: 6px; */
     background: var(--fc-white);
     margin: 0.5rem 0;
     cursor: pointer;
