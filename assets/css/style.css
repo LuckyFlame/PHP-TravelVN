@@ -64,7 +64,7 @@ input:read-only {
 input:focus,
 textarea:focus,
 button:focus {
-    outline: 0;
+    outline: 0 !important;
 }
 
 textarea {
@@ -223,6 +223,30 @@ body {
     height: 50px;
 }
 
+.form-modal-design label.error {
+    color: var(--fc-red) !important;
+    font-size: 0.85rem !important;
+    font-weight: 400 !important;
+    margin-bottom: 0 !important;
+}
+
+.form-modal-design .form-label {
+    margin-bottom: 0.2rem !important;
+}
+
+.form-modal-design .field-modal {
+    position: relative;
+}
+
+.form-modal-design .field-modal,
+.form-modal-design .field-modal-textarea {
+    margin-bottom: 0.75rem;
+}
+
+.form-modal-design .field-modal-textarea {
+    position: relative;
+}
+
 .section-login .container .form .input-field i,
 .section-register .container .form .input-field i {
     position: absolute;
@@ -356,10 +380,6 @@ body {
 .section-profile .container {
     max-width: 1200px;
 }
-
-/* .section-profile  .card-profile {
-   
-} */
 
 .section-profile .form .input {
     display: block;

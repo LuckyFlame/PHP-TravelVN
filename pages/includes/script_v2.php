@@ -12,4 +12,5 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <!-- -->
 <script type="text/javascript" src="/php-travelvn/assets/js/validate.js"></script>
+<script type="text/javascript" src="/php-travelvn/assets/js/app.js"></script>
 <script type="text/javascript" src="/php-travelvn/assets/js/adminlte.js"></script>

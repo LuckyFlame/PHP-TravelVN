@@ -46,10 +46,10 @@ while($row = mysqli_fetch_assoc($run_query)) {
     $sub_array[] = $row["category"];
     $sub_array[] = $row["content"];
     $sub_array[] = 
-        '<a href="javascript:void()" class="btn btn-info" data-id="'.$row["id"].'">
+        '<a class="btn btn-info edit-category text-white" data-id="'.$row["id"].'">
             <i class="bx bx-edit-alt"></i>
         </a>
-        <a href="javascript:void()" class="btn btn-danger" data-id="'.$row["id"].'">
+        <a class="btn btn-danger delete-category text-white" data-id="'.$row["id"].'">
             <i class="bx bx-trash"></i>
         </a>';
     $data[] = $sub_array;

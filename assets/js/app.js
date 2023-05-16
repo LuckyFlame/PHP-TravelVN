@@ -49,7 +49,7 @@ function App() {
         })(jQuery);
 
         selectButton.addEventListener("click", () => {
-            optionMenu.classList.toggle("active");
+            optionMenu.classList.add("active");
         });
 
         // Select Option
@@ -70,6 +70,11 @@ function App() {
             });
         });
 
+        window.addEventListener('click', function(e){   
+            if (!selectButton.contains(e.target)){
+                optionMenu.classList.remove("active");
+            } 
+        });
     }
 }
 

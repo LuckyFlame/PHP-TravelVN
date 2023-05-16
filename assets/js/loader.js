@@ -1,4 +1,4 @@
 /* */
 setTimeout(function() {
     $(".loader").fadeToggle();
-}, 1500);
+}, 2000);
