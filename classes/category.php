@@ -44,6 +44,29 @@ Class Category {
         return $result;
     }
 
+    public static function Find($id) {
+        $connect = connectDB();
+
+        $sql = "SELECT * FROM `category` WHERE `id`='$id' LIMIT 1";
+
+        $query = mysqli_query($connect, $sql);
+        $row = mysqli_fetch_assoc($query);
+
+        $connect->close();
+
+        // echo json_encode
+        echo json_encode($row);
+    }
+
+    public static function GetTotal() {
+        $connect = connectPDO();
+
+        $statement = $connect->prepare("SELECT * FROM category");
+        $statement->execute();
+        $statement->fetchAll();
+        
+        return $statement->rowCount();
+    }
 }
 
 ?>

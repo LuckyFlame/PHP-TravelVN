@@ -70,10 +70,10 @@
                 <div class="col-md-8">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <!-- <a href="../user/index" class="d-flex flex-row align-items-center link back">
+                            <a href="../user/index" class="d-flex flex-row align-items-center link back">
                                 <i class="bx bx-horizontal-left mr-1 mb-1"></i>
                                 <h6>Trở về trang chủ</h6>
-                            </a> -->
+                            </a>
                             <h6>Cập Nhật Thông Tin</h6>
                         </div>
                         <form action="../user/profile.php" method="POST" class="form" id="form-profile" enctype="multipart/form-data">

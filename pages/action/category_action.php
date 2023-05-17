@@ -47,6 +47,12 @@ if(!empty($_POST["action"])) {
 
     }
 
+    if($action == "find_category") {
+        $id = $_POST["id"];
+
+        Category::Find($id);
+
+    }
 }
 
 ?>

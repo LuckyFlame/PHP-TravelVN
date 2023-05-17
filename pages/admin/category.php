@@ -136,16 +136,18 @@
     <?php include("../includes/script_v2.php") ?>
     <script type="text/javascript">
         (function($) {
+
+            // DataTable
             $("#table-category").DataTable({
                 "language": {
                     url : "//cdn.datatables.net/plug-ins/1.13.4/i18n/vi.json",
                 },
                 "serverSide" : true,
                 "autoWidth": false,
-                "processing" : false,
+                "processing" : true,
                 "padding" : true,
                 "order" : [],
-                // "dom": 'ftip',
+                "dom" : "ftip",
                 "ajax" : {
                     "url" : "../fetch/data_category.php",
                     "type" : "POST",
@@ -159,6 +161,7 @@
                 }],
             });
 
+            // Create Category
             $("#form-create-category").validate({
                 rules : {
                     category : {
@@ -199,6 +202,7 @@
                 }
             });
 
+            // Find Category
             $("#table-category").on("click", ".edit-category", function(e) {
                 var table = $("#table-category").DataTable();
                 var id = $(this).data("id");
@@ -207,8 +211,8 @@
                 $("#updateModal").modal("show");
 
                 $.ajax({
-                    url : "../single/get_category.php",
-                    data : {id : id},
+                    url : "../action/category_action.php",
+                    data : {id : id, action : "find_category"},
                     type : "POST",
                     success : function(data) {
                         var json = JSON.parse(data);
@@ -221,6 +225,7 @@
 
             });
 
+            // Delete Category
             $("#table-category").on("click", ".delete-category", function(e) {
                 var table = $("#table-category").DataTable();
 
@@ -240,6 +245,7 @@
                 }
             });
 
+            // Update Category
             $("#form-update-category").validate({
                 rules : {
                     category : {
