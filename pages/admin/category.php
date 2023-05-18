@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <table id="table-category" class="table table-bordered table-hover">
+                                    <table id="table-category" class="table table-bordered table-hover nowrap" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -77,16 +77,18 @@
 
     <script type="text/javascript">
         (function($) {
-            
+
             // DataTable
             $("#table-category").DataTable({
                 "language": {
                     url : "//cdn.datatables.net/plug-ins/1.13.4/i18n/vi.json",
                 },
                 "serverSide" : true,
-                "autoWidth": false,
+                "autoWidth": true,
                 "processing" : true,
                 "padding" : true,
+                "scrollX" : true,
+                "responsive": true,
                 "order" : [],
                 "dom" : "ftip",
                 "ajax" : {
@@ -101,6 +103,7 @@
                     "orderable" : false,
                 }],
             });
+
             // Create Category
             $("#form-create-category").validate({
                 rules : {
@@ -278,22 +281,22 @@
                 resize: false,
                 //
                 menubar : 'view | insert | format | tools',
-                // formats: {
-                //     bold: {
-                //         inline: 'b'
-                //     },
-                //     italic: {
-                //         inline: 'i'
-                //     },
-                //     underline: {
-                //         inline: 'u'
-                //     },
-                //     div: {
-                //         block: 'div',
-                //         wrapper: true
-                //     },
-                //     // blockquote: { block: 'blockquote', classes: 'col', wrapper: true },
-                // },
+                formats: {
+                    // bold: {
+                    //     inline: 'b'
+                    // },
+                    // italic: {
+                    //     inline: 'i'
+                    // },
+                    // underline: {
+                    //     inline: 'u'
+                    // },
+                    // div: {
+                    //     block: 'div',
+                    //     wrapper: true
+                    // },
+                    // blockquote: { block: 'blockquote', classes: 'col', wrapper: true },
+                },
                 setup : function(editor, ed) {
                     editor.on('init keydown change', function(e) {
                         document.querySelector("._getTmce-content-category-create").innerHTML = editor.getContent();
@@ -320,23 +323,22 @@
                 resize: false,
                 //
                 menubar : 'view | insert | format | tools',
-                // formats: {
-                //     bold: {
-                //         inline: 'b'
-                //     },
-                //     italic: {
-                //         inline: 'i'
-                //     },
-                //     underline: {
-                //         inline: 'u'
-                //     },
-                //     div: {
-                //         block: 'div',
-                //         wrapper: true
-                //     },
-                //     // blockquote: { block: 'blockquote', classes: 'col', wrapper: true },
-
-                // },
+                formats: {
+                    // bold: {
+                    //     inline: 'b'
+                    // },
+                    // italic: {
+                    //     inline: 'i'
+                    // },
+                    // underline: {
+                    //     inline: 'u'
+                    // },
+                    // div: {
+                    //     block: 'div',
+                    //     wrapper: true
+                    // },
+                    // blockquote: { block: 'blockquote', classes: 'col', wrapper: true },
+                },
                 setup : function(editor, ed) {
                     editor.on('init keydown change', function(e) {
                         document.querySelector("._getTmce-content-category-update").innerHTML = editor.getContent();

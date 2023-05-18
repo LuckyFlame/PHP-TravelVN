@@ -61,7 +61,7 @@ Class Category {
     public static function GetTotal() {
         $connect = connectPDO();
 
-        $statement = $connect->prepare("SELECT * FROM category");
+        $statement = $connect->prepare("SELECT * FROM `category`");
         $statement->execute();
         $statement->fetchAll();
         

@@ -48,11 +48,11 @@
 
     <!-- Section Profile -->
     <section class="section section-profile">
-        <div class="container rounded mt-5 card-profile card bg-light">
+        <div class="container rounded mt-5 card-profile bg-light">
             <div class="row">
                 <div class="col-md-4 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                        <img src="../../assets/img/user8-128x128.jpg" alt="" class="rounded-circle mt-5" width="90">
+                        <img src="../../assets/img/user8-128x128.jpg" alt="" class="rounded-circle mt-5" width="100">
                         <span class="h5 font-weight-bold mt-1 mb-1"><?php echo $getAuth["username"]; ?></span>
                         <span class=""><?php echo $getAuth["email"] ?></span>
                     </div>

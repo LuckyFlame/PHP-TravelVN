@@ -51,10 +51,10 @@ foreach($result as $row) {
 }
 
 $output = array(
-    "draw"    => intval($_POST["draw"]),
-    "recordsTotal"  =>  $filtered_rows,
+    "draw" => intval($_POST["draw"]),
+    "recordsTotal" => $filtered_rows,
     "recordsFiltered" => Category::GetTotal(),
-    "data"    => $data
+    "data" => $data
 );
 
 echo json_encode($output);
