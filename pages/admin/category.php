@@ -1,8 +1,8 @@
 <?php 
     session_start();
 
-    include("/xampp/htdocs/php-travelvn/library/database.php");
-    include("/xampp/htdocs/php-travelvn/classes/auth.php");
+    include("../../library/database.php");
+    include("../../classes/auth.php");
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +73,8 @@
         <?php include("../includes/admin/footer.php") ?>
    
     </div>
+
+    <!-- Create Category -->
     <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -90,7 +92,8 @@
                         </div>
                         <div class="field-modal-textarea">
                             <label class="form-label">Nội Dung</label>
-                            <textarea name="content" rows="4" class="form-control"></textarea>
+                            <textarea name="content" rows="4" class="form-control tinymce _tmce-content-category-create"></textarea>
+                            <textarea name="content" rows="4" class="form-control _getTmce-content-category-create" hidden></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -101,6 +104,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Update Category -->
     <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -114,15 +119,17 @@
                     <div class="modal-body">
                         <div class="field-modal d-none">
                             <label class="form-label">Id</label>
-                            <input type="text" class="form-control" name="id" id="id">
+                            <input type="text" class="form-control" name="id" id="single_edit_id">
                         </div>
                         <div class="field-modal">
                             <label class="form-label">Thể Loại</label>
-                            <input type="text" class="form-control" name="category" id="get_single_category" value="">
+                            <input type="text" class="form-control" name="category" id="single_edit_category" value="">
                         </div>
                         <div class="field-modal-textarea">
                             <label class="form-label">Nội Dung</label>
-                            <textarea name="content" rows="4" class="form-control" id="get_single_content"></textarea>
+                            <textarea name="content" rows="4" name="content" id="single_edit_content" class="form-control _tmce-content-category-update"></textarea>
+                            <textarea name="content" rows="4" class="form-control _getTmce-content-category-update" hidden></textarea>
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -132,11 +139,51 @@
                 </form>
             </div>
         </div>
-    </div> 
+    </div>
+
+    <!-- View Category -->
+    <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="../admin/category" id="form-view-category" class="form form-modal-design" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Xem Thông Tin</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="bx bx-x"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="field-modal d-none">
+                            <label class="form-label">Id</label>
+                            <input type="text" class="form-control" name="id" id="single_view_id" readonly>
+                        </div>
+                        <div class="field-modal">
+                            <label class="form-label">Thể Loại</label>
+                            <input type="text" class="form-control" name="category" id="single_view_category" value="" readonly>
+                        </div>
+                        <div class="field-modal-textarea">
+                            <label class="form-label">Nội Dung</label>
+                            <textarea name="content" rows="4" class="form-control _tmce-content-category-view" id="single_view_content"></textarea>
+                        </div>
+                        <div class="field-modal">
+                            <label class="form-label">Ngày Tạo</label>
+                            <input type="text" class="form-control" name="category" id="single_view_create_at" value="" readonly>
+                        </div>
+                        <div class="field-modal">
+                            <label class="form-label">Ngày Cập Nhật</label>
+                            <input type="text" class="form-control" name="category" id="single_view_update_at" value="" readonly>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <?php include("../includes/script_v2.php") ?>
     <script type="text/javascript">
         (function($) {
-
             // DataTable
             $("#table-category").DataTable({
                 "language": {
@@ -206,7 +253,7 @@
             $("#table-category").on("click", ".edit-category", function(e) {
                 var table = $("#table-category").DataTable();
                 var id = $(this).data("id");
-                var trid = $(this).closest('tr').attr('id');
+                // var trid = $(this).closest('tr').attr('id');
 
                 $("#updateModal").modal("show");
 
@@ -217,9 +264,39 @@
                     success : function(data) {
                         var json = JSON.parse(data);
 
-                        $("#get_single_category").val(json.category);
-                        $("#get_single_content").val(json.content);
-                        $('#id').val(id);
+                        $('#single_edit_id').val(id);
+                        $("#single_edit_category").val(json.category);
+
+                        // Content
+                        tinymce.get("single_edit_content").setContent(json.content);
+                        $("#single_edit_content").val(json.content);
+                    }
+                });
+            });
+
+            // View Category
+            $("#table-category").on("click", ".view-category", function(e) {
+                var table = $("#table-category").DataTable();
+                var id = $(this).data("id");
+                // var trid = $(this).closest('tr').attr('id');
+
+                $("#viewModal").modal("show");
+
+                $.ajax({
+                    url : "../action/category_action.php",
+                    data : {id : id, action : "find_category"},
+                    type : "POST",
+                    success : function(data) {
+                        var json = JSON.parse(data);
+
+                        $('#single_view_id').val(id);
+                        $("#single_view_category").val(json.category);
+
+                        tinymce.get("single_view_content").setContent(json.content);
+                        $("#single_view_content").val(json.content);
+
+                        $("#single_view_create_at").val(json.create_at);
+                        $("#single_view_update_at").val(json.update_at);
                     }
                 });
 
@@ -284,10 +361,131 @@
                             // my_table.draw();
                             my_table.ajax.reload();
                             $("#updateModal").modal("hide");
-
                         }
                     });
                 }
+            });
+
+            // TinyMCE Create
+            tinymce.init({
+                selector: "textarea._tmce-content-category-create",
+                width : "100%",
+                height : "300",
+                mode : "textareas",
+                // editor_selector : "mceEditor",
+                // editor_deselector : "mceNoEditor",
+                statubar : true,
+                menubar : true,
+                element_format : 'html',
+                block_unsupported_drop : false,
+                language : 'vi',
+                // Remove Logo and Upgrade and Resize
+                branding: false,
+                promotion: false,
+                resize: false,
+                //
+                menubar : 'view | insert | format | tools',
+                // formats: {
+                //     bold: {
+                //         inline: 'b'
+                //     },
+                //     italic: {
+                //         inline: 'i'
+                //     },
+                //     underline: {
+                //         inline: 'u'
+                //     },
+                //     div: {
+                //         block: 'div',
+                //         wrapper: true
+                //     },
+                //     // blockquote: { block: 'blockquote', classes: 'col', wrapper: true },
+                // },
+                setup : function(editor, ed) {
+                    editor.on('init keydown change', function(e) {
+                        document.querySelector("._getTmce-content-category-create").innerHTML = editor.getContent();
+                    });
+                }
+            });
+
+            // TinyMCE Update
+            tinymce.init({
+                selector: "textarea._tmce-content-category-update",
+                width : "100%",
+                height : "300",
+                mode : "textareas",
+                // editor_selector : "mceEditor",
+                // editor_deselector : "mceNoEditor",
+                statubar : true,
+                menubar : true,
+                element_format : 'html',
+                block_unsupported_drop : false,
+                language : 'vi',
+                // Remove Logo and Upgrade and Resize
+                branding: false,
+                promotion: false,
+                resize: false,
+                //
+                menubar : 'view | insert | format | tools',
+                // formats: {
+                //     bold: {
+                //         inline: 'b'
+                //     },
+                //     italic: {
+                //         inline: 'i'
+                //     },
+                //     underline: {
+                //         inline: 'u'
+                //     },
+                //     div: {
+                //         block: 'div',
+                //         wrapper: true
+                //     },
+                //     // blockquote: { block: 'blockquote', classes: 'col', wrapper: true },
+
+                // },
+                setup : function(editor, ed) {
+                    editor.on('init keydown change', function(e) {
+                        document.querySelector("._getTmce-content-category-update").innerHTML = editor.getContent();
+                    });
+                }
+            });
+            
+            // TinyMCE View
+            tinymce.init({
+                selector: "textarea._tmce-content-category-view",
+                width : "100%",
+                height : "300",
+                mode : "textareas",
+                statubar : true,
+                menubar : true,
+                element_format : 'html',
+                block_unsupported_drop : false,
+                language : 'vi',           
+                readonly : true,
+                // Remove Logo and Upgrade and Resize
+                branding: false,
+                promotion: false,
+                resize: false,
+                //
+                menubar : 'view | insert | format | tools',
+                // formats: {
+                //     bold: {
+                //         inline: 'b'
+                //     },
+                //     italic: {
+                //         inline: 'i'
+                //     },
+                //     underline: {
+                //         inline: 'u'
+                //     },
+                //     div: {
+                //         block: 'div',
+                //         wrapper: true
+                //     },
+                //     // blockquote: { block: 'blockquote', classes: 'col', wrapper: true },
+
+                // },
             });
         })(jQuery);
     </script>

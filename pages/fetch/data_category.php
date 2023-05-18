@@ -1,7 +1,7 @@
 <?php 
 
-include("/xampp/htdocs/php-travelvn/library/database.php");
-include("/xampp/htdocs/php-travelvn/classes/category.php");
+include("../../library/database.php");
+include("../../classes/category.php");
 
 $connect = connectPDO();
 
@@ -11,7 +11,7 @@ $query .= "SELECT * FROM category ";
 
 if(isset($_POST["search"]["value"])) {
     $query .= 'WHERE category LIKE "%'.$_POST["search"]["value"].'%" ';
-    $query .= 'OR content LIKE "%'.$_POST["search"]["value"].'%" ';
+    // $query .= 'OR content LIKE "%'.$_POST["search"]["value"].'%" ';
 }
 
 if(isset($_POST["order"])) {
@@ -41,7 +41,12 @@ foreach($result as $row) {
             </a>
             <a class="btn btn-danger delete-category text-white" data-id="'.$row["id"].'">
                 <i class="bx bx-trash"></i>
-            </a>';
+            </a>
+            <a class="btn btn-warning view-category text-white" data-id="'.$row["id"].'">
+                <i class="bx bx-detail"></i>
+            </a>'
+            ;
+            
     $data[] = $sub_array;
 }
 
@@ -54,7 +59,7 @@ $output = array(
 
 echo json_encode($output);
 
-// include("/xampp/htdocs/php-travelvn/library/database.php");
+// include("../../library/database.php");
 
 // $connect = connectDB();
 

@@ -1,7 +1,7 @@
 <?php 
 
-include("/xampp/htdocs/php-travelvn/library/database.php");
-include("/xampp/htdocs/php-travelvn/classes/category.php");
+include("../../library/database.php");
+include("../../classes/category.php");
 
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 

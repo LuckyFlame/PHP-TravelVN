@@ -1,8 +1,8 @@
 <?php 
     session_start();
 
-    include("/xampp/htdocs/php-travelvn/library/database.php");
-    include("/xampp/htdocs/php-travelvn/classes/auth.php");
+    include("../../library/database.php");
+    include("../../classes/auth.php");
 ?>
 
 <!DOCTYPE html>

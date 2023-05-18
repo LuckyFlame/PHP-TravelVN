@@ -38,6 +38,10 @@
 
 }
 
+.form-control:disabled, .form-control[readonly] {
+    background-color: var(--fc-white) !important;
+}
+
 * {
     margin: 0;
     padding: 0;
