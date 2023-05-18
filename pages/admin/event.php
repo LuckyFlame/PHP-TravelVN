@@ -89,6 +89,8 @@
                 "padding" : true,
                 "scrollX" : true,
                 "responsive": true,
+                "stateSave": true,
+                "colReorder": true,
                 "order" : [],
                 "dom" : "ftip",
                 "ajax" : {
