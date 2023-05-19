@@ -396,7 +396,7 @@ body {
     border: 1px solid var(--fc-light-gray);
 }
 
-.section-profile .form .input-datepicker {
+.input-datepicker {
     cursor: pointer;
 }
 

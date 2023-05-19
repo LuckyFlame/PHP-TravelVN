@@ -48,7 +48,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="btn-create">
-                                        <a data-id="" data-toggle="modal" data-target="#createModal" class="btn btn-success text-white"><i class="bx bx-plus"></i> Tạo Mới</a>
+                                        <a data-id="" data-toggle="modal" data-target="#createModalCategory" class="btn btn-success text-white"><i class="bx bx-plus"></i> Tạo Mới</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -108,6 +108,7 @@
 
             // Create Category
             $("#form-create-category").validate({
+                ignore: "",
                 rules : {
                     category : {
                         required : true,
@@ -140,7 +141,7 @@
                         success: function (data) {
                             my_table = $("#table-category").DataTable();
                             my_table.draw();
-                            $("#createModal").modal("hide");
+                            $("#createModalCategory").modal("hide");
                             $("#form-create-category").trigger("reset");
                         }
                     });
@@ -153,7 +154,7 @@
                 var id = $(this).data("id");
                 // var trid = $(this).closest('tr').attr('id');
 
-                $("#updateModal").modal("show");
+                $("#updateModalCategory").modal("show");
 
                 $.ajax({
                     url : "../../pages/action/category_action.php",
@@ -178,7 +179,7 @@
                 var id = $(this).data("id");
                 // var trid = $(this).closest('tr').attr('id');
 
-                $("#viewModal").modal("show");
+                $("#viewModalCategory").modal("show");
 
                 $.ajax({
                     url : "../../pages/action/category_action.php",
@@ -222,6 +223,7 @@
 
             // Update Category
             $("#form-update-category").validate({
+                ignore: "",
                 rules : {
                     category : {
                         required : true,
@@ -258,7 +260,7 @@
 
                             // my_table.draw();
                             my_table.ajax.reload();
-                            $("#updateModal").modal("hide");
+                            $("#updateModalCategory").modal("hide");
                         }
                     });
                 }

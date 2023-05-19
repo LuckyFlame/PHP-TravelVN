@@ -1,5 +1,5 @@
 <!-- Create Category -->
-<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="createModalCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="../admin/category" id="form-create-category" class="form form-modal-design" enctype="multipart/form-data">
@@ -16,7 +16,7 @@
                     </div>
                     <div class="field-modal-textarea">
                         <label class="form-label">Nội Dung</label>
-                        <textarea name="content" rows="4" class="form-control tinymce _tmce-content-category-create"></textarea>
+                        <textarea rows="4" class="form-control tinymce _tmce-content-category-create"></textarea>
                         <textarea name="content" rows="4" class="form-control _getTmce-content-category-create" hidden></textarea>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
 </div>
 
 <!-- Update Category -->
-<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateModalCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="../admin/category" id="form-update-category" class="form form-modal-design" enctype="multipart/form-data">
@@ -51,7 +51,7 @@
                     </div>
                     <div class="field-modal-textarea">
                         <label class="form-label">Nội Dung</label>
-                        <textarea name="content" rows="4" name="content" id="single_edit_content" class="form-control _tmce-content-category-update"></textarea>
+                        <textarea  rows="4" id="single_edit_content" class="form-control _tmce-content-category-update"></textarea>
                         <textarea name="content" rows="4" class="form-control _getTmce-content-category-update" hidden></textarea>
 
                     </div>
@@ -66,7 +66,7 @@
 </div>
 
 <!-- View Category -->
-<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="viewModalCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="../admin/category" id="form-view-category" class="form form-modal-design" enctype="multipart/form-data">
