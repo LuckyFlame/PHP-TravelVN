@@ -3,6 +3,9 @@
 
     include("../../library/database.php");
     include("../../classes/auth.php");
+    include("../../classes/category.php");
+
+    $listCategory = Category::List();
 ?>
 
 <!DOCTYPE html>
@@ -78,6 +81,13 @@
     <script type="text/javascript">
         (function($) {
             
+            // Select 2
+            $('.select2').select2();
+
+            $('.select2bs4').select2({
+                theme: "bootstrap4"
+            });
+
             // DataTable
             $("#table-event").DataTable({
                 
@@ -127,9 +137,6 @@
                         required : true,
                         minlength : 6
                     },
-                    date : {
-                        required : true,
-                    },
                     images : {
                         required : true,
                         fileSizeLimit: 1000000
@@ -152,9 +159,6 @@
                         required : "*Bạn Chưa Nhập Phần Nội Dung",
                         minlength: "*Phần Nội Dung Chỉ Nhận Từ 6 Ký Tự Trở Lên"
                     },
-                    date : {
-                        required : "*Bạn Chưa Nhập Ngày"
-                    },
                     images : {
                         required : "*Bạn Chưa Nhập Hình Ảnh 1"
                     },
@@ -163,12 +167,54 @@
                     },
                 },
                 submitHandler: function(form) {
+
                     // form.submit();
                     // console.log($(form).serializeArray());
-                    $.ajax({
+                    // formObj = [
+                    //     {
+                    //         name : $("#ip_create_event_title").attr("name"),
+                    //         value : $("#ip_create_event_title").val(),
+                    //     },
+                    //     {
+                    //         name : $("#ip_create_event_images").attr("name"),
+                    //         value : $("#ip_create_event_images").val(),
+                    //     },
+                    //     {
+                    //         name : $("#ip_create_event_thumbnail").attr("name"),
+                    //         value : $("#ip_create_event_thumbnail").val(),
+                    //     },
+                    //     {
+                    //         name : $("#ip_create_event_header").attr("name"),
+                    //         value : $("#ip_create_event_header").val(),
+                    //     },
+                    //     {
+                    //         name : $("#ip_create_event_content").attr("name"),
+                    //         value : $("#ip_create_event_content").val(),
+                    //     },
+                    //     {
+                    //         name : $("#ip_create_event_date").attr("name"),
+                    //         value : $("#ip_create_event_date").val(),
+                    //     },
+                    //     {
+                    //         name : $("#ip_create_event_category").attr("name"),
+                    //         value : $("#ip_create_event_category").val(),
+                    //     },
+                    //     {
+                    //         name : $("#ip_create_event_submit").attr("name"),
+                    //         value : $("#ip_create_event_submit").val(),
+                    //     },
+                    // ];
+
+                    // console.log(formObj);
+                    
+                    $.ajax({ 
                         type : "POST",
                         url : "../../pages/action/event_action.php",
-                        data : $(form).serializeArray(),
+                        data : new FormData(form),
+                        dataType: "json",
+                        contentType : false,
+                        processData :false,
+                        cache : false,
                         success: function (data) {
                             
                         }
@@ -258,6 +304,8 @@
                     });
                 }
             });
+
+            $("#form-create-event .input-datepicker").val(calcDate());
 
             $("#form-create-event .input-datepicker").datepicker({
                 dateFormat: "dd/mm/yy",

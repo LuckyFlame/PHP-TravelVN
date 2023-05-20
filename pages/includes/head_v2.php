@@ -13,6 +13,11 @@
 <!-- DataTables -->
 <!-- <link rel="stylesheet" href="../../assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"> -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
+<!-- Select Option -->
+<link rel="stylesheet" href="../../assets/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="../../assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
 <!-- Script Loader -->
 <script type="text/javascript" src="../../assets/js/loader.js"></script>
 <!-- Script Ajax Bootstrap -->

@@ -67,6 +67,31 @@ Class Category {
         
         return $statement->rowCount();
     }
+
+    public static function List() {
+        $connect = connectDB();
+
+        // SQL
+        $sql = "SELECT * FROM `category`";
+
+        // Get Result
+        $result = $connect->query($sql);
+        if ($result === false) {
+
+        } else {
+            $array = array();
+
+            while ($row = $result->fetch_assoc()) {
+                $array[] = $row;
+            }
+            // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            //     $array = $row;
+            // }
+        }
+
+        $connect->close();
+        return $array;
+    }
 }
 
 ?>
