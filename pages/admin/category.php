@@ -83,6 +83,9 @@
 
     <script type="text/javascript">
         (function($) {
+
+            /* Only Update Action inside TinyMCE */
+
             // DataTable
             $("#table-category").DataTable({
                 "language": {
@@ -96,6 +99,7 @@
                 "responsive": true,
                 "stateSave": true,
                 "colReorder": true,
+                "ordering": false,
                 "order" : [],
                 "dom" : "ftip",
                 "ajax" : {
@@ -137,49 +141,50 @@
                         var getContent = document.querySelector("._getTmce-content-category-create");
 
                         getContent.innerHTML = editor.getContent();
-                        // Create Category
-                        $("#form-create-category").validate({
-                            ignore: "",
-                            rules : {
-                                category : {
-                                    required : true,
-                                    rangelength : [3, 25],
-                                },
-                                content : {
-                                    required : true,
-                                    minlength : 6
-                                },
-                            }, 
-                            messages: {
-                                category : {
-                                    required : "*Bạn Chưa Nhập Thể Loại",
-                                    rangelength: "*Thể Loại Chỉ Nhận Từ 3 Đến 25 Ký Tự"
-                                },
-                                content : {
-                                    required : "*Bạn Chưa Nhập Nội Dung",
-                                    minlength : "*Nội Dung Phải Từ 6 Ký Tự Trở Lên"
-                                }
-                            },
-                            submitHandler: function(form) {
-                                $.ajax({
-                                    type : "POST",
-                                    url : "../../pages/action/category_action.php",
-                                    data : $(form).serializeArray(),
-                                    success: function (data) {
+                    });
+                }
+            });
 
-                                        my_table = $("#table-category").DataTable();
-                                        my_table.ajax.reload();
-                                        
-                                        $("#createModalCategory").modal("hide");
+            // Create Category
+            $("#form-create-category").validate({
+                ignore: "",
+                rules : {
+                    category : {
+                        required : true,
+                        rangelength : [3, 25],
+                    },
+                    content : {
+                        required : true,
+                        minlength : 6
+                    },
+                }, 
+                messages: {
+                    category : {
+                        required : "*Bạn Chưa Nhập Thể Loại",
+                        rangelength: "*Thể Loại Chỉ Nhận Từ 3 Đến 25 Ký Tự"
+                    },
+                    content : {
+                        required : "*Bạn Chưa Nhập Nội Dung",
+                        minlength : "*Nội Dung Phải Từ 6 Ký Tự Trở Lên"
+                    }
+                },
+                submitHandler: function(form) {
+                    $.ajax({
+                        type : "POST",
+                        url : "../../pages/action/category_action.php",
+                        data : $(form).serializeArray(),
+                        success: function (data) {
 
-                                        tinymce.get("_tmce-content-category-create").setContent("");
-                                        $("._getTmce-content-category-create").html("");
+                            my_table = $("#table-category").DataTable();
+                            my_table.ajax.reload();
+                            
+                            $("#createModalCategory").modal("hide");
 
-                                        $('#form-create-category')[0].reset();
-                                    }
-                                });
-                            }
-                        });
+                            tinymce.get("_tmce-content-category-create").setContent("");
+                            $("._getTmce-content-category-create").html("");
+
+                            $('#form-create-category')[0].reset();
+                        }
                     });
                 }
             });

@@ -95,6 +95,7 @@
 
             $('.select2bs4').select2({
                 theme: "bootstrap4",
+                tag : [],
             });
 
             // Validate
@@ -123,6 +124,7 @@
                 "responsive": true,
                 "stateSave": true,
                 "colReorder": true,
+                "ordering": false,
                 "order" : [],
                 "dom" : "ftip",
                 "ajax" : {
@@ -252,6 +254,7 @@
                         // cache : false,
                         success: function (data) {
                             my_table = $("#table-event").DataTable();
+
                             my_table.ajax.reload();
                             $("#createModalEvent").modal("hide");
 
@@ -261,9 +264,12 @@
                             tinymce.get("_tmce-header-event-create").setContent("");
                             $("._getTmce-header-event-create").html("");
 
-                            $("#ip_create_event_date").empty();
-
                             $('#form-create-event')[0].reset();
+
+                            $("#ip_create_event_category").select2({
+                                theme : "bootstrap4",
+                                tag : [],
+                            });
 
                             $("#form-create-event .input-datepicker").val(calcDate());
                         }
