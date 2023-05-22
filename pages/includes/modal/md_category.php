@@ -16,7 +16,7 @@
                     </div>
                     <div class="field-modal-textarea">
                         <label class="form-label">Nội Dung</label>
-                        <textarea rows="4" class="form-control tinymce _tmce-content-category-create"></textarea>
+                        <textarea rows="4" class="form-control tinymce _tmce-content-category-create" id="_tmce-content-category-create"></textarea>
                         <textarea name="content" rows="4" class="form-control _getTmce-content-category-create" hidden></textarea>
                     </div>
                 </div>

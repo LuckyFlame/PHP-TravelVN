@@ -11,6 +11,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PHP-TravelVN | Trang Thể Loại</title>
+    <style>
+        .table p {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+        }
+    </style>
     <?php include("../includes/head_v2.php") ?>
 </head>
 <body>
@@ -77,7 +83,6 @@
 
     <script type="text/javascript">
         (function($) {
-
             // DataTable
             $("#table-category").DataTable({
                 "language": {
@@ -106,78 +111,194 @@
                 }],
             });
 
-            // Create Category
-            $("#form-create-category").validate({
-                ignore: "",
-                rules : {
-                    category : {
-                        required : true,
-                        rangelength : [3, 25],
-                    },
-                    content : {
-                        required : true,
-                        // rangelength : [6, 30],
-                        minlength : 6
-                    },
-                }, 
-                messages: {
-                    category : {
-                        required : "*Bạn Chưa Nhập Thể Loại",
-                        rangelength: "*Thể Loại Chỉ Nhận Từ 3 Đến 25 Ký Tự"
-                    },
-                    content : {
-                        required : "*Bạn Chưa Nhập Nội Dung",
-                        // rangelength : "*Mật Khẩu Chỉ Nhận Từ 6 Đến 30 Ký Tự"
-                        minlength : "*Nội Dung Phải Từ 6 Ký Tự Trở Lên"
-                    }
+            // TinyMCE Create
+            tinymce.init({
+                selector: "textarea._tmce-content-category-create",
+                width : "100%",
+                height : "300",
+                mode : "textareas",
+                statubar : true,
+                menubar : true,
+                element_format : 'html',
+                block_unsupported_drop : false,
+                language : 'vi',
+                // Remove Logo and Upgrade and Resize
+                branding: false,
+                promotion: false,
+                resize: false,
+                //
+                menubar : 'view | insert | format | tools',
+                formats: {
+
                 },
-                submitHandler: function(form) {
-                    // form.submit();
-                    // console.log($(form).serializeArray());
-                    $.ajax({
-                        type : "POST",
-                        url : "../../pages/action/category_action.php",
-                        data : $(form).serializeArray(),
-                        success: function (data) {
-                            my_table = $("#table-category").DataTable();
-                            my_table.draw();
-                            $("#createModalCategory").modal("hide");
-                            $("#form-create-category").trigger("reset");
-                        }
+                setup : function(editor, ed) {
+                    editor.on('init keydown change', function(e) {
+
+                        var getContent = document.querySelector("._getTmce-content-category-create");
+
+                        getContent.innerHTML = editor.getContent();
+                        // Create Category
+                        $("#form-create-category").validate({
+                            ignore: "",
+                            rules : {
+                                category : {
+                                    required : true,
+                                    rangelength : [3, 25],
+                                },
+                                content : {
+                                    required : true,
+                                    minlength : 6
+                                },
+                            }, 
+                            messages: {
+                                category : {
+                                    required : "*Bạn Chưa Nhập Thể Loại",
+                                    rangelength: "*Thể Loại Chỉ Nhận Từ 3 Đến 25 Ký Tự"
+                                },
+                                content : {
+                                    required : "*Bạn Chưa Nhập Nội Dung",
+                                    minlength : "*Nội Dung Phải Từ 6 Ký Tự Trở Lên"
+                                }
+                            },
+                            submitHandler: function(form) {
+                                $.ajax({
+                                    type : "POST",
+                                    url : "../../pages/action/category_action.php",
+                                    data : $(form).serializeArray(),
+                                    success: function (data) {
+
+                                        my_table = $("#table-category").DataTable();
+                                        my_table.ajax.reload();
+                                        
+                                        $("#createModalCategory").modal("hide");
+
+                                        tinymce.get("_tmce-content-category-create").setContent("");
+                                        $("._getTmce-content-category-create").html("");
+
+                                        $('#form-create-category')[0].reset();
+                                    }
+                                });
+                            }
+                        });
                     });
                 }
             });
 
-            // Find Category
-            $("#table-category").on("click", ".edit-category", function(e) {
-                var table = $("#table-category").DataTable();
-                var id = $(this).data("id");
-                // var trid = $(this).closest('tr').attr('id');
+            // TinyMCE Update
+            tinymce.init({
+                selector: "textarea._tmce-content-category-update",
+                width : "100%",
+                height : "300",
+                mode : "textareas",
+                statubar : true,
+                menubar : true,
+                element_format : 'html',
+                block_unsupported_drop : false,
+                language : 'vi',
+                // Remove Logo and Upgrade and Resize
+                branding: false,
+                promotion: false,
+                resize: false,
+                //
+                menubar : 'view | insert | format | tools',
+                formats: {
 
-                $("#updateModalCategory").modal("show");
+                },
+                setup : function(editor, ed) {
+                    editor.on('init keydown change', function(e) {
+                        var getContent2 = document.querySelector("._getTmce-content-category-update");
 
-                $.ajax({
-                    url : "../../pages/action/category_action.php",
-                    data : {id : id, action : "find_category"},
-                    type : "POST",
-                    success : function(data) {
-                        var json = JSON.parse(data);
+                        getContent2.innerHTML = editor.getContent();
+                        
+                        // Find Category
+                        $("#table-category").on("click", ".edit-category", function(e) {
+                            var table = $("#table-category").DataTable();
+                            var id = $(this).data("id");
 
-                        $('#single_edit_id').val(id);
-                        $("#single_edit_category").val(json.category);
+                            $("#updateModalCategory").modal("show");
 
-                        // Content
-                        tinymce.get("single_edit_content").setContent(json.content);
-                        $("#single_edit_content").val(json.content);
-                    }
-                });
+                            $.ajax({
+                                url : "../../pages/action/category_action.php",
+                                data : {id : id, action : "find_category"},
+                                type : "POST",
+                                success : function(data) {
+                                    var json = JSON.parse(data);
+
+                                    $('#single_edit_id').val(id);
+                                    $("#single_edit_category").val(json.category);
+
+                                    // val
+                                    tinymce.get("single_edit_content").setContent(json.content);
+                                    $("#single_edit_content").val(json.content);
+
+                                    // Update Category
+                                    $("#form-update-category").validate({
+                                        ignore: "",
+                                        rules : {
+                                            category : {
+                                                required : true,
+                                                rangelength : [3, 25],
+                                            },
+                                            content : {
+                                                required : true,
+                                                minlength : 6
+                                            },
+                                        }, 
+                                        messages: {
+                                            category : {
+                                                required : "*Bạn Chưa Nhập Thể Loại",
+                                                rangelength: "*Thể Loại Chỉ Nhận Từ 3 Đến 25 Ký Tự"
+                                            },
+                                            content : {
+                                                required : "*Bạn Chưa Nhập Nội Dung",
+                                                minlength : "*Nội Dung Phải Từ 6 Ký Tự Trở Lên"
+                                            }
+                                        },
+                                        submitHandler: function(form) {
+                                            $.ajax({
+                                                type : "POST",
+                                                url : "../../pages/action/category_action.php",
+                                                data : $(form).serializeArray(),
+                                                success: function (data) {
+                                                    my_table = $("#table-category").DataTable();
+                                                    my_table.ajax.reload();
+                                                    
+                                                    $("#updateModalCategory").modal("hide");
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    });
+                }
+            });
+
+            // TinyMCE View
+            tinymce.init({
+                selector: "textarea._tmce-content-category-view",
+                width : "100%",
+                height : "300",
+                mode : "textareas",
+                statubar : true,
+                menubar : true,
+                element_format : 'html',
+                block_unsupported_drop : false,
+                language : 'vi',           
+                readonly : true,
+                // Remove Logo and Upgrade and Resize
+                branding: false,
+                promotion: false,
+                resize: false,
+                //
+                menubar : 'view | insert | format | tools',
             });
 
             // View Category
             $("#table-category").on("click", ".view-category", function(e) {
                 var table = $("#table-category").DataTable();
                 var id = $(this).data("id");
-                // var trid = $(this).closest('tr').attr('id');
 
                 $("#viewModalCategory").modal("show");
 
@@ -204,9 +325,7 @@
             // Delete Category
             $("#table-category").on("click", ".delete-category", function(e) {
                 var table = $("#table-category").DataTable();
-
                 e.preventDefault();
-
                 var id = $(this).data("id");
 
                 if(confirm("Bạn có muốn xóa thể loại này không?")) {
@@ -216,175 +335,11 @@
                         type : "POST",
                         success : function(data) {
                             $("#table-category #"+id).remove();
-                        }
-                    });
-                }
-            });
-
-            // Update Category
-            $("#form-update-category").validate({
-                ignore: "",
-                rules : {
-                    category : {
-                        required : true,
-                        rangelength : [3, 25],
-                    },
-                    content : {
-                        required : true,
-                        // rangelength : [6, 30],
-                        minlength : 6
-                    },
-                }, 
-                messages: {
-                    category : {
-                        required : "*Bạn Chưa Nhập Thể Loại",
-                        rangelength: "*Thể Loại Chỉ Nhận Từ 3 Đến 25 Ký Tự"
-                    },
-                    content : {
-                        required : "*Bạn Chưa Nhập Nội Dung",
-                        // rangelength : "*Mật Khẩu Chỉ Nhận Từ 6 Đến 30 Ký Tự"
-                        minlength : "*Nội Dung Phải Từ 6 Ký Tự Trở Lên"
-                    }
-                },
-                submitHandler: function(form) {
-                    
-                    // form.submit();
-                    // console.log($(form).serializeArray());
-
-                    $.ajax({
-                        type : "POST",
-                        url : "../../pages/action/category_action.php",
-                        data : $(form).serializeArray(),
-                        success: function (data) {
                             my_table = $("#table-category").DataTable();
-
-                            // my_table.draw();
                             my_table.ajax.reload();
-                            $("#updateModalCategory").modal("hide");
                         }
                     });
                 }
-            });
-
-            // TinyMCE Create
-            tinymce.init({
-                selector: "textarea._tmce-content-category-create",
-                width : "100%",
-                height : "300",
-                mode : "textareas",
-                // editor_selector : "mceEditor",
-                // editor_deselector : "mceNoEditor",
-                statubar : true,
-                menubar : true,
-                element_format : 'html',
-                block_unsupported_drop : false,
-                language : 'vi',
-                // Remove Logo and Upgrade and Resize
-                branding: false,
-                promotion: false,
-                resize: false,
-                //
-                menubar : 'view | insert | format | tools',
-                formats: {
-                    // bold: {
-                    //     inline: 'b'
-                    // },
-                    // italic: {
-                    //     inline: 'i'
-                    // },
-                    // underline: {
-                    //     inline: 'u'
-                    // },
-                    // div: {
-                    //     block: 'div',
-                    //     wrapper: true
-                    // },
-                    // blockquote: { block: 'blockquote', classes: 'col', wrapper: true },
-                },
-                setup : function(editor, ed) {
-                    editor.on('init keydown change', function(e) {
-                        document.querySelector("._getTmce-content-category-create").innerHTML = editor.getContent();
-                    });
-                }
-            });
-
-            // TinyMCE Update
-            tinymce.init({
-                selector: "textarea._tmce-content-category-update",
-                width : "100%",
-                height : "300",
-                mode : "textareas",
-                // editor_selector : "mceEditor",
-                // editor_deselector : "mceNoEditor",
-                statubar : true,
-                menubar : true,
-                element_format : 'html',
-                block_unsupported_drop : false,
-                language : 'vi',
-                // Remove Logo and Upgrade and Resize
-                branding: false,
-                promotion: false,
-                resize: false,
-                //
-                menubar : 'view | insert | format | tools',
-                formats: {
-                    // bold: {
-                    //     inline: 'b'
-                    // },
-                    // italic: {
-                    //     inline: 'i'
-                    // },
-                    // underline: {
-                    //     inline: 'u'
-                    // },
-                    // div: {
-                    //     block: 'div',
-                    //     wrapper: true
-                    // },
-                    // blockquote: { block: 'blockquote', classes: 'col', wrapper: true },
-                },
-                setup : function(editor, ed) {
-                    editor.on('init keydown change', function(e) {
-                        document.querySelector("._getTmce-content-category-update").innerHTML = editor.getContent();
-                    });
-                }
-            });
-            
-            // TinyMCE View
-            tinymce.init({
-                selector: "textarea._tmce-content-category-view",
-                width : "100%",
-                height : "300",
-                mode : "textareas",
-                statubar : true,
-                menubar : true,
-                element_format : 'html',
-                block_unsupported_drop : false,
-                language : 'vi',           
-                readonly : true,
-                // Remove Logo and Upgrade and Resize
-                branding: false,
-                promotion: false,
-                resize: false,
-                //
-                menubar : 'view | insert | format | tools',
-                // formats: {
-                //     bold: {
-                //         inline: 'b'
-                //     },
-                //     italic: {
-                //         inline: 'i'
-                //     },
-                //     underline: {
-                //         inline: 'u'
-                //     },
-                //     div: {
-                //         block: 'div',
-                //         wrapper: true
-                //     },
-                //     // blockquote: { block: 'blockquote', classes: 'col', wrapper: true },
-
-                // },
             });
         })(jQuery);
     </script>

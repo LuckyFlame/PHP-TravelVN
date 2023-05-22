@@ -14,6 +14,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PHP-TravelVN | Trang Sự Kiện</title>
+    <style>
+        .table p {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+        }
+    </style>
     <?php include("../includes/head_v2.php") ?>
 </head>
 <body>
@@ -55,12 +61,13 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <table id="table-event" class="table table-bordered table-hover" style="width:100%">
+                                    <table id="table-event" class="table table-bordered table-hover nowrap" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>Tựa Đề</th>
-                                                <th>Ảnh</th>
+                                                <th>Phần Đầu</th>
+                                                <th>Hình Ảnh</th>
                                                 <th>Thao Tác</th>
                                             </tr>
                                         </thead>
@@ -81,12 +88,26 @@
     <script type="text/javascript">
         (function($) {
             
+            $("#form-create-event .input-datepicker").val(calcDate());
+
             // Select 2
             $('.select2').select2();
 
             $('.select2bs4').select2({
-                theme: "bootstrap4"
+                theme: "bootstrap4",
             });
+
+            // Validate
+            jQuery.validator.addMethod('fileSizeLimit', function(value, element, limit) {
+                return !element.files[0] || (element.files[0].size <= limit);
+            }, "Kích Thước Tệp Quá Lớn");
+
+            $("#form-create-event .input-datepicker").datepicker({
+                dateFormat: "dd/mm/yy",
+                minDate: new Date("01/01/1970"),
+                duration: "fast",
+            });
+
 
             // DataTable
             $("#table-event").DataTable({
@@ -112,14 +133,68 @@
                     $(nRow).attr("id", aData[0]);
                 },
                 "columnDefs" : [{
-                    "target" : [0, 3],
+                    "target" : [0, 4],
                     "orderable" : false,
                 }],
             });
 
-            jQuery.validator.addMethod('fileSizeLimit', function(value, element, limit) {
-                return !element.files[0] || (element.files[0].size <= limit);
-            }, "Kích Thước Tệp Quá Lớn");
+            // TinyMCE Create
+            tinymce.init({
+                selector: "textarea._tmce-header-event-create",
+                width : "100%",
+                height : "300",
+                mode : "textareas",
+                statubar : true,
+                menubar : true,
+                element_format : 'html',
+                block_unsupported_drop : false,
+                language : 'vi',
+                // Remove Logo and Upgrade and Resize
+                branding: false,
+                promotion: false,
+                resize: false,
+                //
+                menubar : 'view | insert | format | tools',
+                formats: {
+
+                },
+                setup : function(editor, ed) {
+                    editor.on('init keydown change', function(e) {
+                        var getContent = document.querySelector("._getTmce-header-event-create");
+
+                        getContent.innerHTML = editor.getContent();
+                    });
+                }
+            });
+
+            tinymce.init({
+                selector: "textarea._tmce-content-event-create",
+                width : "100%",
+                height : "300",
+                mode : "textareas",
+                statubar : true,
+                menubar : true,
+                element_format : 'html',
+                block_unsupported_drop : false,
+                language : 'vi',
+                // Remove Logo and Upgrade and Resize
+                branding: false,
+                promotion: false,
+                resize: false,
+                //
+                menubar : 'view | insert | format | tools',
+                formats: {
+
+                },
+                setup : function(editor, ed) {
+                    editor.on('init keydown change', function(e) {
+                        var getContent2 = document.querySelector("._getTmce-content-event-create");
+
+                        getContent2.innerHTML = editor.getContent();
+                    });
+                }
+            });
+
 
             // Create Event
             $("#form-create-event").validate({
@@ -167,150 +242,33 @@
                     },
                 },
                 submitHandler: function(form) {
-
-                    // form.submit();
-                    // console.log($(form).serializeArray());
-                    // formObj = [
-                    //     {
-                    //         name : $("#ip_create_event_title").attr("name"),
-                    //         value : $("#ip_create_event_title").val(),
-                    //     },
-                    //     {
-                    //         name : $("#ip_create_event_images").attr("name"),
-                    //         value : $("#ip_create_event_images").val(),
-                    //     },
-                    //     {
-                    //         name : $("#ip_create_event_thumbnail").attr("name"),
-                    //         value : $("#ip_create_event_thumbnail").val(),
-                    //     },
-                    //     {
-                    //         name : $("#ip_create_event_header").attr("name"),
-                    //         value : $("#ip_create_event_header").val(),
-                    //     },
-                    //     {
-                    //         name : $("#ip_create_event_content").attr("name"),
-                    //         value : $("#ip_create_event_content").val(),
-                    //     },
-                    //     {
-                    //         name : $("#ip_create_event_date").attr("name"),
-                    //         value : $("#ip_create_event_date").val(),
-                    //     },
-                    //     {
-                    //         name : $("#ip_create_event_category").attr("name"),
-                    //         value : $("#ip_create_event_category").val(),
-                    //     },
-                    //     {
-                    //         name : $("#ip_create_event_submit").attr("name"),
-                    //         value : $("#ip_create_event_submit").val(),
-                    //     },
-                    // ];
-
-                    // console.log(formObj);
-                    
                     $.ajax({ 
                         type : "POST",
                         url : "../../pages/action/event_action.php",
                         data : new FormData(form),
-                        dataType: "json",
+                        // dataType: "json",
                         contentType : false,
                         processData :false,
-                        cache : false,
+                        // cache : false,
                         success: function (data) {
-                            
+                            my_table = $("#table-event").DataTable();
+                            my_table.ajax.reload();
+                            $("#createModalEvent").modal("hide");
+
+                            tinymce.get("_tmce-content-event-create").setContent("");
+                            $("._getTmce-content-event-create").html("");
+
+                            tinymce.get("_tmce-header-event-create").setContent("");
+                            $("._getTmce-header-event-create").html("");
+
+                            $("#ip_create_event_date").empty();
+
+                            $('#form-create-event')[0].reset();
+
+                            $("#form-create-event .input-datepicker").val(calcDate());
                         }
                     });
                 }
-            });
-
-            // TinyMCE Create
-            tinymce.init({
-                selector: "textarea._tmce-header-event-create",
-                width : "100%",
-                height : "300",
-                mode : "textareas",
-                // editor_selector : "mceEditor",
-                // editor_deselector : "mceNoEditor",
-                statubar : true,
-                menubar : true,
-                element_format : 'html',
-                block_unsupported_drop : false,
-                language : 'vi',
-                // Remove Logo and Upgrade and Resize
-                branding: false,
-                promotion: false,
-                resize: false,
-                //
-                menubar : 'view | insert | format | tools',
-                formats: {
-                    // bold: {
-                    //     inline: 'b'
-                    // },
-                    // italic: {
-                    //     inline: 'i'
-                    // },
-                    // underline: {
-                    //     inline: 'u'
-                    // },
-                    // div: {
-                    //     block: 'div',
-                    //     wrapper: true
-                    // },
-                    // blockquote: { block: 'blockquote', classes: 'col', wrapper: true },
-                },
-                setup : function(editor, ed) {
-                    editor.on('init keydown change', function(e) {
-                        document.querySelector("._getTmce-header-event-create").innerHTML = editor.getContent();
-                    });
-                }
-            });
-
-            tinymce.init({
-                selector: "textarea._tmce-content-event-create",
-                width : "100%",
-                height : "300",
-                mode : "textareas",
-                // editor_selector : "mceEditor",
-                // editor_deselector : "mceNoEditor",
-                statubar : true,
-                menubar : true,
-                element_format : 'html',
-                block_unsupported_drop : false,
-                language : 'vi',
-                // Remove Logo and Upgrade and Resize
-                branding: false,
-                promotion: false,
-                resize: false,
-                //
-                menubar : 'view | insert | format | tools',
-                formats: {
-                    // bold: {
-                    //     inline: 'b'
-                    // },
-                    // italic: {
-                    //     inline: 'i'
-                    // },
-                    // underline: {
-                    //     inline: 'u'
-                    // },
-                    // div: {
-                    //     block: 'div',
-                    //     wrapper: true
-                    // },
-                    // blockquote: { block: 'blockquote', classes: 'col', wrapper: true },
-                },
-                setup : function(editor, ed) {
-                    editor.on('init keydown change', function(e) {
-                        document.querySelector("._getTmce-content-event-create").innerHTML = editor.getContent();
-                    });
-                }
-            });
-
-            $("#form-create-event .input-datepicker").val(calcDate());
-
-            $("#form-create-event .input-datepicker").datepicker({
-                dateFormat: "dd/mm/yy",
-                minDate: new Date("01/01/1970"),
-                duration: "fast",
             });
 
         })(jQuery);

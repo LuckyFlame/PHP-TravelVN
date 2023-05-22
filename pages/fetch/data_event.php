@@ -34,14 +34,17 @@ foreach($result as $row) {
     $sub_array = array();
     $sub_array[] = $row["id"];
     $sub_array[] = $row["title"];
+    $sub_array[] = $row["header"];
 
-    $sub_array[] = "<img src='../../assets/img/default-150x150.png' width='70' height='70'>";
-
-    // if($row["images"] != "") {
-
-    // } else {
-
-    // }
+    if($row["thumbnail"] != "") {
+        $sub_array[] = "<img src='../../uploads/thumbnail/". $row["thumbnail"] ."' width='100' height='75'>";
+    } else {
+        if($row["images"] != "") {
+            $sub_array[] = "<img src='../../uploads/images/". $row["images"] ."' width='100' height='75'>";
+        } else {
+            $sub_array[] = "<img src='../../assets/img/default-150x150.png' width='75' height='75'>";
+        }
+    }
 
     $sub_array[] = 
             '<a class="btn btn-info edit-event text-white" data-id="'.$row["id"].'">

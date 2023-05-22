@@ -24,12 +24,12 @@
                     </div>
                     <div class="field-modal-textarea">
                         <label class="form-label">Phần Đầu</label>
-                        <textarea rows="4" class="form-control tinymce _tmce-header-event-create"></textarea>
+                        <textarea rows="4" class="form-control tinymce _tmce-header-event-create" id="_tmce-header-event-create"></textarea>
                         <textarea name="header" id="ip_create_event_header" rows="4" class="form-control _getTmce-header-event-create" hidden></textarea>
                     </div>
                     <div class="field-modal-textarea">
                         <label class="form-label">Phần Nội Dung</label>
-                        <textarea rows="4" class="form-control tinymce _tmce-content-event-create"></textarea>
+                        <textarea rows="4" class="form-control tinymce _tmce-content-event-create" id="_tmce-content-event-create"></textarea>
                         <textarea name="content" id="ip_create_event_content" rows="4" class="form-control _getTmce-content-event-create" hidden></textarea>
                     </div>
                     <div class="field-modal">
