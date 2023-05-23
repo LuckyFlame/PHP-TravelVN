@@ -350,8 +350,8 @@
                     $('#ip_update_event_id').val(json.id);
                     $('#ip_update_event_title').val(json.title);
 
-                    // $('#ip_update_event_images').val(json.images);
-                    // $('#ip_update_event_thumbnail').val(json.title);
+                    // $('#ip_update_event_images').val();
+                    // $('#ip_update_event_thumbnail').val();
 
                     // // val
                     tinymce.get("_tmce-header-event-update").setContent(json.header);
@@ -359,25 +359,15 @@
                     tinymce.get("_tmce-content-event-update").setContent(json.content);
                     $("#_tmce-content-event-update").val(json.content);
 
-                    // $('#ip_update_event_category').val(json.category);
-                    // $('#ip_update_event_category').select2({
-                    //     theme: "bootstrap4",
-                    //     tag: [json.category],
-                    //     data : [json.category]
-                    // });
-
                     console.log(json.category);
+                    // console.log(json.images);
+                    // console.log(json.thumbnail);
 
                     $('#ip_update_event_date').val(json.date);
 
                 }
             });
         });
-
-
-
-
-
 
         })(jQuery);
     </script>
