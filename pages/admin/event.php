@@ -161,9 +161,9 @@
                 },
                 setup : function(editor, ed) {
                     editor.on('init keydown change', function(e) {
-                        var getContent = document.querySelector("._getTmce-header-event-create");
+                        var getHeader = document.querySelector("._getTmce-header-event-create");
 
-                        getContent.innerHTML = editor.getContent();
+                        getHeader.innerHTML = editor.getContent();
                     });
                 }
             });
@@ -189,9 +189,9 @@
                 },
                 setup : function(editor, ed) {
                     editor.on('init keydown change', function(e) {
-                        var getContent2 = document.querySelector("._getTmce-content-event-create");
+                        var getContent = document.querySelector("._getTmce-content-event-create");
 
-                        getContent2.innerHTML = editor.getContent();
+                        getContent.innerHTML = editor.getContent();
                     });
                 }
             });
@@ -275,6 +275,109 @@
                     });
                 }
             });
+
+            // TinyMCE Update
+            tinymce.init({
+                selector: "textarea._tmce-content-event-update",
+                width : "100%",
+                height : "300",
+                mode : "textareas",
+                statubar : true,
+                menubar : true,
+                element_format : 'html',
+                block_unsupported_drop : false,
+                language : 'vi',
+                // Remove Logo and Upgrade and Resize
+                branding: false,
+                promotion: false,
+                resize: false,
+                //
+                menubar : 'view | insert | format | tools',
+                formats: {
+
+                },
+                setup : function(editor, ed) {
+                    editor.on('init keydown change', function(e) {
+                        var getContent3 = document.querySelector("._getTmce-content-event-update");
+
+                        getContent3.innerHTML = editor.getContent();
+                    });
+                }
+            });
+
+            tinymce.init({
+                selector: "textarea._tmce-header-event-update",
+                width : "100%",
+                height : "300",
+                mode : "textareas",
+                statubar : true,
+                menubar : true,
+                element_format : 'html',
+                block_unsupported_drop : false,
+                language : 'vi',
+                // Remove Logo and Upgrade and Resize
+                branding: false,
+                promotion: false,
+                resize: false,
+                //
+                menubar : 'view | insert | format | tools',
+                formats: {
+
+                },
+                setup : function(editor, ed) {
+                    editor.on('init keydown change', function(e) {
+                        var getHeader2 = document.querySelector("._getTmce-header-event-update");
+
+                        getHeader2.innerHTML = editor.getContent();
+                    });
+                }
+            });
+
+        // Find Event
+        $("#table-event").on("click", ".edit-event", function(e) {
+            var table = $("#table-event").DataTable();
+            var id = $(this).data("id");
+
+            $("#updateModalEvent").modal("show");
+
+            $.ajax({
+                url : "../../pages/action/event_action.php",
+                data : {id : id, action : "find_event"},
+                type : "POST",
+                success : function(data) {
+                    var json = JSON.parse(data);
+
+                    $('#ip_update_event_id').val(json.id);
+                    $('#ip_update_event_title').val(json.title);
+
+                    // $('#ip_update_event_images').val(json.images);
+                    // $('#ip_update_event_thumbnail').val(json.title);
+
+                    // // val
+                    tinymce.get("_tmce-header-event-update").setContent(json.header);
+                    $("#_tmce-header-event-update").val(json.header);
+                    tinymce.get("_tmce-content-event-update").setContent(json.content);
+                    $("#_tmce-content-event-update").val(json.content);
+
+                    // $('#ip_update_event_category').val(json.category);
+                    // $('#ip_update_event_category').select2({
+                    //     theme: "bootstrap4",
+                    //     tag: [json.category],
+                    //     data : [json.category]
+                    // });
+
+                    console.log(json.category);
+
+                    $('#ip_update_event_date').val(json.date);
+
+                }
+            });
+        });
+
+
+
+
+
 
         })(jQuery);
     </script>

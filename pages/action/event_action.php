@@ -52,10 +52,17 @@ if(!empty($_POST["action"])) {
         $folderThumbnail = "../../uploads/thumbnail";
         $pathThumbnail = $folderThumbnail . "/" . $thumbnailRand;
 
-        // if(move_uploaded_file($imagesTmpName, $pathImages) && move_uploaded_file($thumbnailTmpName, $pathThumbnail)) {
-        //     $create_event = new Event($title, $imagesRand, $thumbnailRand, $header, $content, $date, $create_at, $update_at, $category);
-        //     Event::Create($create_event);
-        // }
+        if(move_uploaded_file($imagesTmpName, $pathImages) && move_uploaded_file($thumbnailTmpName, $pathThumbnail)) {
+            $create_event = new Event($title, $imagesRand, $thumbnailRand, $header, $content, $date, $create_at, $update_at, $category);
+            Event::Create($create_event);
+        }
+    }
+
+    if($action == "find_event") {
+        $id = $_POST["id"];
+
+        Event::Find($id);
+
     }
 }
 
