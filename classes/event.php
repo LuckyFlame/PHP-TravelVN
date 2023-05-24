@@ -63,6 +63,27 @@ Class Event {
         echo json_encode($row);
     }
 
+    public static function Find_Action_Update($id) {
+        $connect = connectDB();
+
+        $sql = "SELECT * FROM `event` WHERE `id` = '$id'";
+
+        $result = $connect->query($sql);
+        if($result == false) {
+            
+        }
+
+        $array = array();
+
+        while($row = $result->fetch_assoc()) {
+            $array[] = $row;
+        }
+
+        $connect->close();
+        
+        return $array;
+    }
+
     public static function GetTotal() {
         $connect = connectPDO();
 

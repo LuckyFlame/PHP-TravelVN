@@ -108,6 +108,11 @@
                 duration: "fast",
             });
 
+            $("#form-update-event .input-datepicker").datepicker({
+                dateFormat: "dd/mm/yy",
+                minDate: new Date("01/01/1970"),
+                duration: "fast",
+            });
 
             // DataTable
             $("#table-event").DataTable({
@@ -301,6 +306,124 @@
                         var getContent3 = document.querySelector("._getTmce-content-event-update");
 
                         getContent3.innerHTML = editor.getContent();
+
+                        // Find Event
+                        $("#table-event").on("click", ".edit-event", function(e) {
+                            var table = $("#table-event").DataTable();
+                            var id = $(this).data("id");
+
+                            $("#updateModalEvent").modal("show");
+
+                            $.ajax({
+                                url : "../../pages/action/event_action.php",
+                                data : {id : id, action : "find_event"},
+                                type : "POST",
+                                success : function(data) {
+                                    var json = JSON.parse(data);
+
+                                    $('#ip_update_event_id').val(json.id);
+                                    $('#ip_update_event_title').val(json.title);
+
+                                    // $('#ip_update_event_images').val();
+                                    // $('#ip_update_event_thumbnail').val();
+
+                                    $('#img_update_event_images').attr("src", "../../uploads/images/"+ json.images +"");
+                                    $('#img_update_event_thumbnail').attr("src", "../../uploads/thumbnail/"+ json.thumbnail +"");
+
+                                    // // val
+                                    tinymce.get("_tmce-header-event-update").setContent(json.header);
+                                    $("#_tmce-header-event-update").val(json.header);
+                                    tinymce.get("_tmce-content-event-update").setContent(json.content);
+                                    $("#_tmce-content-event-update").val(json.content);
+
+                                    var str = [json.category];
+                                    var str_stringify = JSON.stringify(str[0]).trim();
+                                    var arr = str_stringify.split(",");
+                                    
+                                    var cleanArr = arr.map(function(element) {
+                                        return element.replace(/["\\]/g, '');
+                                    });
+
+                                    // console.log(cleanArr);
+
+                                    var values = cleanArr;
+                                    var selectElement = $("#ip_update_event_category");
+
+                                    selectElement.val(values);
+                                    selectElement.trigger('change');
+
+                                    // console.log(json.images);
+                                    // console.log(json.thumbnail);
+
+                                    $('#ip_update_event_date').val(json.date);
+
+                                    // Update Event
+                                    $("#form-update-event").validate({
+                                        ignore: "",
+                                        rules : {
+                                            title : {
+                                                required : true,
+                                                rangelength : [3, 25],
+                                            },
+                                            header : {
+                                                required : true,
+                                                minlength : 6
+                                            },
+                                            content : {
+                                                required : true,
+                                                minlength : 6
+                                            },
+                                            images : {
+                                                // required : true,
+                                                fileSizeLimit: 1000000
+                                            },
+                                            thumbnail : {
+                                                // required : true,
+                                                fileSizeLimit: 1000000
+                                            },
+                                        }, 
+                                        messages: {
+                                            title : {
+                                                required : "*Bạn Chưa Nhập Tựa Đề",
+                                                rangelength: "*Tựa Đề Chỉ Nhận Từ 3 Đến 25 Ký Tự"
+                                            },
+                                            header : {
+                                                required : "*Bạn Chưa Nhập Phần Đầu",
+                                                minlength: "*Phần Đầu Chỉ Nhận Từ 6 Ký Tự Trở Lên"
+                                            },
+                                            content : {
+                                                required : "*Bạn Chưa Nhập Phần Nội Dung",
+                                                minlength: "*Phần Nội Dung Chỉ Nhận Từ 6 Ký Tự Trở Lên"
+                                            },
+                                            images : {
+                                                // required : "*Bạn Chưa Nhập Hình Ảnh 1"
+                                            },
+                                            thumbnail : {
+                                                // required : "*Bạn Chưa Nhập Hình Ảnh 2"
+                                            },
+                                        },
+                                        submitHandler: function(form) {
+                                            $.ajax({
+                                                type : "POST",
+                                                url : "../../pages/action/event_action.php",
+                                                data : new FormData(form),
+                                                contentType : false,
+                                                processData :false,
+                                                success: function (data) {
+                                                    my_table = $("#table-event").DataTable();
+                                                    my_table.ajax.reload();
+                                                    
+                                                    $("#updateModalEvent").modal("hide");
+
+                                                    $('#form-update-event')[0].reset();
+
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        });
                     });
                 }
             });
@@ -333,44 +456,121 @@
                 }
             });
 
-        // Find Event
-        $("#table-event").on("click", ".edit-event", function(e) {
-            var table = $("#table-event").DataTable();
-            var id = $(this).data("id");
 
-            $("#updateModalEvent").modal("show");
+            // TinyMCE View
+            tinymce.init({
+                selector: "textarea._tmce-header-event-view",
+                width : "100%",
+                height : "300",
+                mode : "textareas",
+                statubar : true,
+                menubar : true,
+                element_format : 'html',
+                block_unsupported_drop : false,
+                language : 'vi',           
+                readonly : true,
+                // Remove Logo and Upgrade and Resize
+                branding: false,
+                promotion: false,
+                resize: false,
+                //
+                menubar : 'view | insert | format | tools',
+            });
 
-            $.ajax({
-                url : "../../pages/action/event_action.php",
-                data : {id : id, action : "find_event"},
-                type : "POST",
-                success : function(data) {
-                    var json = JSON.parse(data);
+            tinymce.init({
+                selector: "textarea._tmce-content-event-view",
+                width : "100%",
+                height : "300",
+                mode : "textareas",
+                statubar : true,
+                menubar : true,
+                element_format : 'html',
+                block_unsupported_drop : false,
+                language : 'vi',           
+                readonly : true,
+                // Remove Logo and Upgrade and Resize
+                branding: false,
+                promotion: false,
+                resize: false,
+                //
+                menubar : 'view | insert | format | tools',
+            });
 
-                    $('#ip_update_event_id').val(json.id);
-                    $('#ip_update_event_title').val(json.title);
+            // View Event
+            $("#table-event").on("click", ".view-event", function(e) {
+                var table = $("#table-event").DataTable();
+                var id = $(this).data("id");
 
-                    // $('#ip_update_event_images').val();
-                    // $('#ip_update_event_thumbnail').val();
+                $("#viewModalEvent").modal("show");
 
-                    // // val
-                    tinymce.get("_tmce-header-event-update").setContent(json.header);
-                    $("#_tmce-header-event-update").val(json.header);
-                    tinymce.get("_tmce-content-event-update").setContent(json.content);
-                    $("#_tmce-content-event-update").val(json.content);
+                $.ajax({
+                    url : "../../pages/action/event_action.php",
+                    data : {id : id, action : "find_event"},
+                    type : "POST",
+                    success : function(data) {
+                        var json = JSON.parse(data);
+                        $('#ip_view_event_id').val(json.id);
+                        $('#ip_view_event_title').val(json.title);
 
-                    console.log(json.category);
-                    // console.log(json.images);
-                    // console.log(json.thumbnail);
+                        // $('#ip_update_event_images').val();
+                        // $('#ip_update_event_thumbnail').val();
 
-                    $('#ip_update_event_date').val(json.date);
+                        $('#img_view_event_images').attr("src", "../../uploads/images/"+ json.images +"");
+                        $('#img_view_event_thumbnail').attr("src", "../../uploads/thumbnail/"+ json.thumbnail +"");
 
+                        // // val
+                        tinymce.get("_tmce-header-event-view").setContent(json.header);
+                        // $("#_tmce-header-event-view").val(json.header);
+                        tinymce.get("_tmce-content-event-view").setContent(json.content);
+                        // $("#_tmce-content-event-view").val(json.content);
+
+                        var str = [json.category];
+                        var str_stringify = JSON.stringify(str[0]).trim();
+                        var arr = str_stringify.split(",");
+                        
+                        var cleanArr = arr.map(function(element) {
+                            return element.replace(/["\\]/g, '');
+                        });
+
+                        // console.log(cleanArr);
+
+                        var values = cleanArr;
+                        var selectElement = $("#ip_view_event_category");
+
+                        selectElement.text(values);
+
+                        // console.log(json.images);
+                        // console.log(json.thumbnail);
+
+                        $('#ip_view_event_date').val(json.date);
+                        $('#view_create_at_event').val(json.create_at);
+                        $('#view_update_at_event').val(json.update_at);
+
+                    }
+                });
+
+            });
+
+            // Delete Event
+            $("#table-event").on("click", ".delete-event", function(e) {
+                var table = $("#table-event").DataTable();
+                e.preventDefault();
+                var id = $(this).data("id");
+
+                if(confirm("Bạn có muốn xóa sự kiện này không?")) {
+                    $.ajax({
+                        url : "../../pages/action/event_action.php",
+                        data : {id : id, action : "delete_event"},
+                        type : "POST",
+                        success : function(data) {
+                            $("#table-event #"+id).remove();
+                            my_table = $("#table-event").DataTable();
+                            my_table.ajax.reload();
+                        }
+                    });
                 }
             });
-        });
-
         })(jQuery);
     </script>
-
 </body>
 </html>

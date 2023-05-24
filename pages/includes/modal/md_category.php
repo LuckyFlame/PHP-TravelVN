@@ -91,11 +91,11 @@
                     </div>
                     <div class="field-modal">
                         <label class="form-label">Ngày Tạo</label>
-                        <input type="text" class="form-control" name="category" id="single_view_create_at" value="" readonly>
+                        <input type="text" class="form-control" name="create_at" id="single_view_create_at" value="" readonly>
                     </div>
                     <div class="field-modal">
                         <label class="form-label">Ngày Cập Nhật</label>
-                        <input type="text" class="form-control" name="category" id="single_view_update_at" value="" readonly>
+                        <input type="text" class="form-control" name="update_at" id="single_view_update_at" value="" readonly>
                     </div>
                 </div>
                 <div class="modal-footer">

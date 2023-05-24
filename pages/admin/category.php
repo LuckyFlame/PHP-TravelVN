@@ -269,6 +269,9 @@
                                                     my_table.ajax.reload();
                                                     
                                                     $("#updateModalCategory").modal("hide");
+
+                                                    $('#form-update-category')[0].reset();
+
                                                 }
                                             });
                                         }
