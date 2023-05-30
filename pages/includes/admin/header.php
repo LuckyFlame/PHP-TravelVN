@@ -43,13 +43,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="" class="nav-link">
                             <i class="nav-icon bx bx-user"></i>
                             <p>Tài Khoản</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="" class="nav-link">
                             <i class="nav-icon bx bx-calendar-check"></i>
                             <p>Lịch Trình</p>
                         </a>
@@ -67,25 +67,25 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="../../pages/admin/tour" class="nav-link">
                             <i class="nav-icon bx bx-notepad"></i>
                             <p>Sản Phẩm</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="" class="nav-link">
                             <i class="nav-icon bx bx-edit-alt"></i>
                             <p>Đánh Giá</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="" class="nav-link">
                             <i class="nav-icon bx bx-wallet"></i>
                             <p>Hóa Đơn</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="" class="nav-link">
                             <i class="nav-icon bx bx-chart"></i>
                             <p>Biểu Đồ</p>
                         </a>
