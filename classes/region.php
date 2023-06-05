@@ -16,7 +16,7 @@ Class Region {
     public static function Create(Region $region) {
         $connect = connectDB();
 
-        $sql = "INSERT INTO `region` (`region`, `acronym`, `content`, `coordinates`, ``, `create_at`, `update_at`) 
+        $sql = "INSERT INTO `region` (`region`, `acronym`, `content`, `coordinates`, `create_at`, `update_at`) 
                 VALUES ('$region->region', '$region->acronym', '$region->content', '$region->coordinates', '$region->create_at', '$region->update_at')";
 
         $result = $connect->query($sql);
@@ -28,7 +28,7 @@ Class Region {
         $connect = connectDB();
 
         $sql = "UPDATE `region` SET `region` = '$region->region', `acronym` = '$region->acronym', `content` = '$region->content', `coordinates` = '$region->coordinates', 
-                `create_at` = '$region->create_at', `update_at` = '$region->update_at' WHERE `region`.`id` = '$id'";
+        `update_at` = '$region->update_at' WHERE `region`.`id` = '$id'";
 
         $result = $connect->query($sql);
         $connect->close();

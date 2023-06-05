@@ -34,7 +34,7 @@ Class Tour {
         $connect = connectDB();
 
         $sql = "UPDATE `tour` SET `title` = '$tour->title', `content` = '$tour->content', `images` = '$tour->images', `thumbnail` = '$tour->thumbnail', `price` = '$tour->price', `price_childrens` = '$tour->price_childrens',
-                `price_persons` = '$tour->price_persons', `number_of_seat` = '$tour->number_of_seat', `days` = '$tour->days', `region` = '$tour->region', `create_at` = '$tour->create_at', `update_at` = '$tour->update_at' WHERE `tour`.`id` = '$id'";
+                `price_persons` = '$tour->price_persons', `number_of_seat` = '$tour->number_of_seat', `days` = '$tour->days', `region` = '$tour->region', `update_at` = '$tour->update_at' WHERE `tour`.`id` = '$id'";
 
         $result = $connect->query($sql);
         $connect->close();
