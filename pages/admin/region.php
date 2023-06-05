@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PHP-TravelVN | Trang Tour</title>
+    <title>PHP-TravelVN | Trang Khu Vực</title>
     <style>
         .table p {
             margin-bottom: 0 !important;
@@ -36,12 +36,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Sản Phẩm</h1>
+                            <h1>Khu Vực</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
-                                <li class="breadcrumb-item active">Sản Phẩm</li>
+                                <li class="breadcrumb-item active">Khu Vực</li>
                             </ol>
                         </div>
                     </div>
@@ -55,17 +55,17 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="btn-create">
-                                        <a data-id="" data-toggle="modal" data-target="#createModalTour" class="btn btn-success text-white"><i class="bx bx-plus"></i> Tạo Mới</a>
+                                        <a data-id="" data-toggle="modal" data-target="#createModalRegion" class="btn btn-success text-white"><i class="bx bx-plus"></i> Tạo Mới</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <table id="table-tour" class="table table-bordered table-hover nowrap" style="width:100%">
+                                    <table id="table-region" class="table table-bordered table-hover nowrap" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Tựa Đề</th>
-                                                <th>Ngày</th>
-                                                <th>Hình Ảnh</th>
+                                                <th>Khu Vực</th>
+                                                <th>Ký Tự</th>
+                                                <th>Nội Dung</th>
                                                 <th>Hành Động</th>
                                             </tr>
                                         </thead>
@@ -80,12 +80,12 @@
         <?php include("../includes/admin/footer.php") ?>
     </div>
     
-    <?php include("../includes/modal/md_tour.php") ?>
+    <?php include("../includes/modal/md_region.php") ?>
     <?php include("../includes/script_v2.php") ?>
 
     <script type="text/javascript">
         // DataTable
-        $("#table-tour").DataTable({
+        $("#table-region").DataTable({
             
             "language": {
                 url : "//cdn.datatables.net/plug-ins/1.13.4/i18n/vi.json",
@@ -102,7 +102,7 @@
             "order" : [],
             "dom" : "ftip",
             "ajax" : {
-                "url" : "../fetch/data_tour.php",
+                "url" : "../fetch/data_region.php",
                 "type" : "POST",
             },
             "fnCreatedRow" : function(nRow, aData, iDataIndex) {
@@ -112,34 +112,6 @@
                 "target" : [0, 4],
                 "orderable" : false,
             }],
-        });
-
-        tinymce.init({
-            selector: "textarea._tmce-content-tour-create",
-            width : "100%",
-            height : "300",
-            mode : "textareas",
-            statubar : true,
-            menubar : true,
-            element_format : 'html',
-            block_unsupported_drop : false,
-            language : 'vi',
-            // Remove Logo and Upgrade and Resize
-            branding: false,
-            promotion: false,
-            resize: false,
-            //
-            menubar : 'view | insert | format | tools',
-            formats: {
-
-            },
-            setup : function(editor, ed) {
-                editor.on('init keydown change', function(e) {
-                    var getContent = document.querySelector("._getTmce-content-tour-create");
-
-                    getContent.innerHTML = editor.getContent();
-                });
-            }
         });
     </script>
 </body>

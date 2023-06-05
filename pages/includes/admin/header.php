@@ -66,6 +66,13 @@
                             <p>Sự Kiện</p>
                         </a>
                     </li>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../../pages/admin/region" class="nav-link">
+                            <i class="nav-icon bx bx-globe"></i>
+                            <p>Khu Vực</p>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="../../pages/admin/tour" class="nav-link">
                             <i class="nav-icon bx bx-notepad"></i>
