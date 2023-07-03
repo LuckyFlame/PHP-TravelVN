@@ -70,6 +70,14 @@ body {
     min-height: 100vh;
 }
 
+/* Error Validate */
+form label.error {
+    color: #D93025 !important;
+    font-size: 0.85rem !important;
+    font-weight: 400 !important;
+    margin-bottom: 0 !important;
+}
+
 /* Edit Page */
 
 /*

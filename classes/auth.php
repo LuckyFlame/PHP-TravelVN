@@ -2,7 +2,7 @@
 
 /* Call Date Default Time Zone Asia */
 
-include("../library/timezone.php");
+include("../../library/timezone.php");
 
 /* Create Class Name Auth */
 
@@ -64,20 +64,27 @@ Class Auth {
         return $result;
     }
 
-    public static function Login($username, $password) {
+    public static function Login($username) {
         $connect = connectDB();
 
-        $sql = "SELECT * FROM `account` WHERE `username` = '$username' AND `password` = '$password'";
+        $sql = "SELECT * FROM `account` WHERE `username` = '$username'";
         $result = $connect->query($sql);
 
-        if(mysqli_num_rows($result) === 0) {
-            $bool = false;
+        if ($result === false) {
+
         } else {
-            $bool = true;
+            $array = array();
+
+            while ($row = $result->fetch_assoc()) {
+                $array = $row;
+            }
+            // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            //     $array = $row;
+            // }
         }
 
         disconnectDB($connect);
-        return $bool;
+        return $array;
     }
 
     public static function Find($username) {

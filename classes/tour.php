@@ -2,7 +2,7 @@
 
 /* Call Date Default Time Zone Asia */
 
-include("../library/timezone.php");
+include("../../library/timezone.php");
 
 /* Create Class Name Tour */
 
