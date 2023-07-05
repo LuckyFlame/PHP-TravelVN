@@ -17,4 +17,5 @@
 <script type="text/javascript" src="../../library/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="../../assets/js/validate.js"></script>
 <script type="text/javascript" src="../../assets/js/app.js"></script>
+<script type="text/javascript" src="../../assets/js/main.js"></script>
 <script type="text/javascript" src="../../assets/js/adminlte.js"></script>

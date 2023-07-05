@@ -432,6 +432,29 @@ form label.error {
 }
 
 /* 
+ * Modal Admin
+ */
+
+.form-modal-design .form-label {
+    margin-bottom: 0.2rem !important;
+}
+
+.form-modal-design .field-modal,
+.form-modal-design .field-modal-textarea {
+    position: relative;
+    margin-bottom: 0.75rem !important;
+}
+
+/*
+ * DataTables
+ */
+
+.dataTables_wrapper {
+    width: auto !important;
+    margin: 0 !important;
+}
+
+/* 
  * Media
  * Min : 1200px, 992px, 767.98
  * Max : 767.98px
@@ -450,6 +473,10 @@ form label.error {
     .section-event .advertise,
     .section-event .line-event {
         display: block;
+    }
+
+    .dataTables_scrollHeadInner, .table {
+        width: 100% !important;
     }
 }
 

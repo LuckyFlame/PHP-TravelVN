@@ -56,7 +56,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="../../pages/main/ad_category" class="nav-link">
                         <i class="nav-icon bx bx-category"></i>
                         <p>Thể Loại</p>
                     </a>
