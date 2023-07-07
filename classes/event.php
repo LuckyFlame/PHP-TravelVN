@@ -11,19 +11,23 @@ Class Event {
     // Event
     public $title, $images, $thumbnail, $header, $content, $datetime;
     
+    // Foreign Key
+    public $category;
+
     // Create Event
     public $create_at;
 
     // Update Event
     public $update_at;
 
-    public function __construct($title, $images, $thumbnail, $header, $content, $datetime) {
+    public function __construct($title, $images, $thumbnail, $header, $content, $datetime, $category) {
         $this->title = $title;
         $this->images = $images;
         $this->thumbnail = $thumbnail;
         $this->header = $header;
         $this->content = $content;
         $this->datetime = $datetime;
+        $this->category = $category;
     }
 
     // CREATE : UPDATE : DELETE: READ : FIND : JSE_FIND [FIND BY ID LIMIT 1]
@@ -31,8 +35,8 @@ Class Event {
         $connect = connectDB();
         $date = date('j/n/Y - g:i a');
 
-        $sql = "INSERT INTO `event` (`title`, `images`, `thumbnail`, `header`, `content`, `datetime`, `create_at`)
-                VALUES ('$event->title', '$event->images', '$event->thumbnail', '$event->header', '$event->content', '$event->datetime', '$date')";
+        $sql = "INSERT INTO `event` (`title`, `images`, `thumbnail`, `header`, `content`, `datetime`, `category`, `create_at`)
+                VALUES ('$event->title', '$event->images', '$event->thumbnail', '$event->header', '$event->content', '$event->datetime', '$event->category', '$date')";
 
         $result = $connect->query($sql);
         disconnectDB($connect);
@@ -43,8 +47,8 @@ Class Event {
         $connect = connectDB();
         $date = date('j/n/Y - g:i a');
 
-        $sql = "UPDATE `event` SET `title` = '$event->title', `images` = '$event->images', `thumbnail` = '$event->thumbnail', `header` = '$event->header'.
-                `content` = '$event->content', `datetime` = '$event->datetime', `update_at` = '$date' WHERE `event`.`id` = '$id'";
+        $sql = "UPDATE `event` SET `title` = '$event->title', `images` = '$event->images', `thumbnail` = '$event->thumbnail', `header` = '$event->header',
+                `content` = '$event->content', `datetime` = '$event->datetime', `category` = '$event->category', `update_at` = '$date' WHERE `event`.`id` = '$id'";
     
         $result = $connect->query($sql);
         disconnectDB($connect);
@@ -108,7 +112,7 @@ Class Event {
         return $array;
     }
 
-    public static function JSE_FIND($id) {
+    public static function JSE_Find($id) {
         $connect = connectDB();
 
         $sql = "SELECT * FROM `event` WHERE `id` = '$id' LIMIT 1";

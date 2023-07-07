@@ -62,6 +62,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="../../pages/main/ad_event" class="nav-link">
+                        <i class="nav-icon bx bx-calendar-event"></i>
+                        <p>Sự Kiện</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon bx bx-notepad"></i>
                         <p>Sản Phẩm</p>

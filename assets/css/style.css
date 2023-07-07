@@ -454,11 +454,21 @@ form label.error {
     margin: 0 !important;
 }
 
+table {
+    width: 100% !important;
+}
+
 /* 
  * Media
  * Min : 1200px, 992px, 767.98
  * Max : 767.98px
  */
+
+@media (min-width: 1440px) {
+    .dataTables_scrollHeadInner, .table {
+        width: 100% !important;
+    }
+}
 
 @media (min-width: 1200px) {
     .section-profile .container,
@@ -468,15 +478,10 @@ form label.error {
     }
 }
 
-
 @media (min-width: 992px) {
     .section-event .advertise,
     .section-event .line-event {
         display: block;
-    }
-
-    .dataTables_scrollHeadInner, .table {
-        width: 100% !important;
     }
 }
 
