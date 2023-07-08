@@ -1,5 +1,5 @@
 <!-- Create Category -->
-<div class="modal fade" id="AddModelCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="AddModalCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="../../pages/main/ad_category" id="form-create-category" class="form form-modal-design" enctype="multipart/form-data">
@@ -31,7 +31,7 @@
 <!-- End Create Category -->
 
 <!-- Edit Category -->
-<div class="modal fade" id="EditModelCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="EditModalCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="../../pages/main/ad_category" id="form-edit-category" class="form form-modal-design" enctype="multipart/form-data">
@@ -68,7 +68,7 @@
 <!-- End Edit Category -->
 
 <!-- Detail Category -->
-<div class="modal fade" id="DetailModelCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="DetailModalCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="../../pages/main/ad_category" id="form-detail-category" class="form form-modal-design" enctype="multipart/form-data">

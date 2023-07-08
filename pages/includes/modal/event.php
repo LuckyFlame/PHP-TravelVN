@@ -1,5 +1,5 @@
 <!-- Create Event -->
-<div class="modal fade" id="AddModelEvent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="AddModalEvent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="../../pages/main/ad_event" id="form-create-event" class="form form-modal-design" enctype="multipart/form-data">
@@ -66,7 +66,7 @@
 <!-- End Create Event -->
 
 <!-- Edit Event -->
-<div class="modal fade" id="EditModelEvent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="EditModalEvent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="../../pages/main/ad_event" id="form-edit-event" class="form form-modal-design" enctype="multipart/form-data">
@@ -143,7 +143,7 @@
 <!-- End Edit Event -->
 
 <!-- View Event -->
-<div class="modal fade" id="DetailModelEvent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="DetailModalEvent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="../../pages/main/ad_event" id="form-detail-event" class="form form-modal-design" enctype="multipart/form-data">

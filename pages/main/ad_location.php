@@ -11,7 +11,7 @@ include("../../classes/auth.php");
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>PHP TravelVN | Trang Thể Loại</title>
+    <title>PHP TravelVN | Trang Khu Vực</title>
     <?php include("../../pages/includes/admin/head.php"); ?>
 </head>
 <body>
@@ -24,12 +24,12 @@ include("../../classes/auth.php");
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Thể Loại</h1>
+                            <h1>Khu Vực</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
-                                <li class="breadcrumb-item active">Thể Loại</li>
+                                <li class="breadcrumb-item active">Khu Vực</li>
                             </ol>
                         </div>
                     </div>
@@ -43,18 +43,19 @@ include("../../classes/auth.php");
                             <div class="card">
                                 <div class="card-header">
                                     <div>
-                                        <a data-id="" data-toggle="modal" data-target="#AddModalCategory" class="btn btn-success text-white">
+                                        <a data-id="" data-toggle="modal" data-target="#AddModalLocation" class="btn btn-success text-white">
                                             <i class="bx bx-plus"></i> Tạo Mới
                                         </a>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <table id="table-category" class="table table-bordered table-hover nowrap datatables">
+                                    <table id="table-location" class="table table-bordered table-hover nowrap datatables">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Thể Loại</th>
-                                                <th>Nội Dung</th>
+                                                <th>Khu Vực</th>
+                                                <th>Ký Tự</th>
+                                                <th>Thành Phố</th>
                                                 <th>Thao Tác</th>
                                             </tr>
                                         </thead>
@@ -69,7 +70,7 @@ include("../../classes/auth.php");
         <?php include("../../pages/includes/admin/footer.php"); ?>
     </div>
 
-    <?php include("../../pages/includes/modal/category.php"); ?>
+    <?php include("../../pages/includes/modal/event.php"); ?>
     <?php include("../../pages/includes/admin/script.php"); ?>
 </body>
 </html>

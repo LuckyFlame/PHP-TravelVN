@@ -46,7 +46,7 @@ $list_category = Category::Read();
                             <div class="card">
                                 <div class="card-header">
                                     <div>
-                                        <a data-id="" data-toggle="modal" data-target="#AddModelEvent" class="btn btn-success text-white">
+                                        <a data-id="" data-toggle="modal" data-target="#AddModalEvent" class="btn btn-success text-white">
                                             <i class="bx bx-plus"></i> Tạo Mới
                                         </a>
                                     </div>

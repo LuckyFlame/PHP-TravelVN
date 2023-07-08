@@ -240,7 +240,7 @@ function ModalCategory() {
                         myTable.ajax.reload();
                         
                         // Close Modal
-                        $("#AddModelCategory").modal("hide");
+                        $("#AddModalCategory").modal("hide");
 
                         // TinyMCE Reset
                         tinymce.get("tinymce-content-category-create").setContent("");
@@ -284,7 +284,7 @@ function ModalCategory() {
             var table = $("#table-category").DataTable();
             var id = $(this).data("id");
             // Open Modal
-            $("#EditModelCategory").modal("show");
+            $("#EditModalCategory").modal("show");
 
             // Ajax
             $.ajax({
@@ -337,7 +337,7 @@ function ModalCategory() {
                                     table.ajax.reload();
                                     
                                     // Close Modal
-                                    $("#EditModelCategory").modal("hide");                                                
+                                    $("#EditModalCategory").modal("hide");                                                
 
                                     // Form Input Reset
                                     $("#form-edit-category")[0].reset();
@@ -396,7 +396,7 @@ function ModalCategory() {
             e.preventDefault();
             var id = $(this).data("id");
 
-            $("#DetailModelCategory").modal("show");
+            $("#DetailModalCategory").modal("show");
 
             $.ajax({
                 url: "../../pages/action/act_category.php",
@@ -563,7 +563,7 @@ function ModalEvent() {
                        
                        myTable.ajax.reload();
                         // Close Modal
-                        $("#AddModelEvent").modal("hide");
+                        $("#AddModalEvent").modal("hide");
 
                         // TinyMCE Reset
                         tinymce.get("tinymce-header-event-create").setContent("");
@@ -643,7 +643,7 @@ function ModalEvent() {
             e.preventDefault();
             var id = $(this).data("id");
 
-            $("#EditModelEvent").modal("show");
+            $("#EditModalEvent").modal("show");
 
             $.ajax({
                 url: "../../pages/action/act_event.php",
@@ -733,7 +733,7 @@ function ModalEvent() {
                                     table = $("#table-event").DataTable();
                                     table.ajax.reload();
                                     
-                                    $("#EditModelEvent").modal("hide");
+                                    $("#EditModalEvent").modal("hide");
                                     $('#form-edit-event')[0].reset();
                                 }
                             });
@@ -807,7 +807,7 @@ function ModalEvent() {
             e.preventDefault();
             var id = $(this).data("id");
 
-            $("#DetailModelEvent").modal("show");
+            $("#DetailModalEvent").modal("show");
 
             $.ajax({
                 url: "../../pages/action/act_event.php",
@@ -850,6 +850,36 @@ function ModalEvent() {
     })(jQuery);
 }
 
+function ModalLocation() {
+    $("#table-location").DataTable({
+        "language": {
+            url : "https://cdn.datatables.net/plug-ins/1.13.4/i18n/vi.json",
+        },
+        "serverSide" : true,
+        "autoWidth": true,
+        "processing" : true,
+        "padding" : true,
+        "scrollX" : true,
+        "responsive": true,
+        "stateSave": true,
+        "colReorder": true,
+        "ordering": false,
+        "order" : [],
+        "dom" : "ftip",
+        "ajax" : {
+            "url" : "../../pages/fetch/data-location.php",
+            "type" : "POST",
+        },
+        "fnCreatedRow" : function(nRow, aData, iDataIndex) {
+            $(nRow).attr("id", aData[0]);
+        },
+        "columnDefs" : [{
+            "target" : [0, 3],
+            "orderable" : false,
+        }],
+    });
+}
+
 if(document.getElementById("table-category")) {
     ModalCategory();
 }
@@ -857,6 +887,11 @@ if(document.getElementById("table-category")) {
 if(document.getElementById("table-event")) {
     ModalEvent();
 }
+
+if(document.getElementById("table-location")) {
+    ModalLocation();
+}
+
 
 Validate();
 Select();
