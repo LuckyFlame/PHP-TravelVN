@@ -931,6 +931,132 @@ function ModalLocation() {
             });
         }
     });
+
+    // Update Location
+    $("#table-location").on("click", "#edit-location", function(e) {
+        var table = $("#table-location").DataTable();
+        var id = $(this).data("id");
+        // Open Modal
+        $("#EditModalLocation").modal("show");
+
+        // Ajax
+        $.ajax({
+            url: "../../pages/action/act_location.php",
+            data: {
+                id: id,
+                action: "find-location"
+            },
+            type: "POST",
+            success: function(data) {
+                var response = JSON.parse(data);
+                $("#single-edit-id-location").val(response.id);
+                $("#single-edit-area-location").val(response.area);
+                $("#single-edit-acronym-location").val(response.acronym);
+                $("#single-edit-city-location").val(response.city);
+            
+                // Edit Location
+                // Validate
+                $("#form-edit-location").validate({
+                    ignore: "",
+                    rules : {
+                        area: {
+                            required : true,
+                            rangelength : [3, 25]
+                        },
+                        acronym: {
+                            required : true,
+                            rangelength : [3, 10]
+                        },
+                        city: {
+                            required : true,
+                            rangelength : [3, 25]
+                        },
+                    },
+                    messages: {
+                        area : {
+                            required: "*Bạn Chưa Nhập Khu Vực",
+                            rangelength: "*Khu Vực Chỉ Nhận Từ 3 Đến 25 Ký Tự"
+                        },
+                        acronym : {
+                            required: "*Bạn Chưa Nhập Ký Tự",
+                            rangelength: "*Ký Tự Chỉ Nhận Từ 3 Đến 10 Ký Tự"
+                        },
+                        city : {
+                            required: "*Bạn Chưa Nhập Thành Phố",
+                            rangelength: "*Thành Phố Chỉ Nhận Từ 3 Đến 25 Ký Tự"
+                        },
+                    },
+                    submitHandler: function(form) {
+                        $.ajax({
+                            type : "POST",
+                            url : "../../pages/action/act_location.php",
+                            data : $(form).serializeArray(),
+                            success: function (data) {
+                                // console.log($(form).serializeArray());
+                                myTable = $("#table-location").DataTable();
+                                myTable.ajax.reload();
+                                
+                                // Close Modal
+                                $("#EditModalLocation").modal("hide");                    
+            
+                                // Refesh Map
+            
+                                // Form Input Reset
+                                $("#form-edit-location")[0].reset();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
+    // Delete
+    $("#table-location").on("click", "#delete-location", function(e) {
+        var table = $("#table-location").DataTable();
+        e.preventDefault();
+        var id = $(this).data("id");
+
+        if(confirm("Bạn có muốn xóa thể loại mã "+ id +" này không?")) {
+            // Ajax
+            $.ajax({
+                url: "../../pages/action/act_location.php",
+                data: {
+                    id: id, 
+                    action: "delete-location"
+                },
+                type: "POST",
+                success: function(data) {
+                    // Check Status
+                }
+            });
+        }
+    });
+    // Detail
+    $("#table-location").on("click", "#detail-location", function(e) {
+        var table = $("#table-location").DataTable();
+        var id = $(this).data("id");
+        // Open Modal
+        $("#DetailModalLocation").modal("show");
+
+        // Ajax
+        $.ajax({
+            url: "../../pages/action/act_location.php",
+            data: {
+                id: id,
+                action: "find-location"
+            },
+            type: "POST",
+            success: function(data) {
+                var response = JSON.parse(data);
+                $("#single-detail-id-location").val(response.id);
+                $("#single-detail-area-location").val(response.area);
+                $("#single-detail-acronym-location").val(response.acronym);
+                $("#single-detail-city-location").val(response.city);
+                $("#single-detail-create-at-location").val(response.create_at);
+                $("#single-detail-update-at-location").val(response.update_at);
+            }
+        });
+    });
 }
 
 if(document.getElementById("table-category")) {

@@ -25,7 +25,14 @@ if(!empty($_POST["action"])) {
 
     // Update Location
     if($action == "submit-edit-location") {
-      
+        $id = $_POST["id"];
+        $area = $_POST["area"];
+        $acronym = $_POST["acronym"];
+        $city = $_POST["city"];
+        
+        $create_location = new Location($area, $acronym, $city);
+
+        Location::Update($id, $create_location);
     }
     
     // Find Location

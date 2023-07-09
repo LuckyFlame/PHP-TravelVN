@@ -8,6 +8,16 @@ function Leaflet() {
         osm.addTo(map);
         L.Control.geocoder().addTo(map);
     }
+
+    if(document.getElementById("leaflet-map-edit-location")) {
+        var map = L.map("leaflet-map-edit-location").setView([10.847950373787143, 106.62199029894055], 8);
+        var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        });
+    
+        osm.addTo(map);
+        L.Control.geocoder().addTo(map);
+    }
 }
 
 Leaflet();
