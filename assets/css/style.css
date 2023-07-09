@@ -459,6 +459,15 @@ table {
 }
 
 /* 
+ * Leaflet
+ */
+
+.map {
+    width: 100%;
+    height: 40vh;
+} 
+
+/* 
  * Media
  * Min : 1200px, 992px, 767.98
  * Max : 767.98px

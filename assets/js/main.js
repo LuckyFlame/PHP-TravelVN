@@ -878,6 +878,59 @@ function ModalLocation() {
             "orderable" : false,
         }],
     });
+
+    // Create Location
+    $("#form-create-location").validate({
+        ignore: "",
+        rules : {
+            area: {
+                required : true,
+                rangelength : [3, 25]
+            },
+            acronym: {
+                required : true,
+                rangelength : [3, 10]
+            },
+            city: {
+                required : true,
+                rangelength : [3, 25]
+            },
+        },
+        messages: {
+            area : {
+                required: "*Bạn Chưa Nhập Khu Vực",
+                rangelength: "*Khu Vực Chỉ Nhận Từ 3 Đến 25 Ký Tự"
+            },
+            acronym : {
+                required: "*Bạn Chưa Nhập Ký Tự",
+                rangelength: "*Ký Tự Chỉ Nhận Từ 3 Đến 10 Ký Tự"
+            },
+            city : {
+                required: "*Bạn Chưa Nhập Thành Phố",
+                rangelength: "*Thành Phố Chỉ Nhận Từ 3 Đến 25 Ký Tự"
+            },
+        },
+        submitHandler: function(form) {
+            $.ajax({
+                type : "POST",
+                url : "../../pages/action/act_location.php",
+                data : $(form).serializeArray(),
+                success: function (data) {
+                    // console.log($(form).serializeArray());
+                    myTable = $("#table-location").DataTable();
+                    myTable.ajax.reload();
+                    
+                    // Close Modal
+                    $("#AddModalLocation").modal("hide");                    
+
+                    // Refesh Map
+
+                    // Form Input Reset
+                    $("#form-create-location")[0].reset();
+                }
+            });
+        }
+    });
 }
 
 if(document.getElementById("table-category")) {
@@ -892,7 +945,7 @@ if(document.getElementById("table-location")) {
     ModalLocation();
 }
 
-
+// Display Function
 Validate();
 Select();
 FileValidate();

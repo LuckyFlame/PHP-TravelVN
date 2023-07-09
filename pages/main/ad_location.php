@@ -13,6 +13,10 @@ include("../../classes/auth.php");
 <head>
     <title>PHP TravelVN | Trang Khu Vực</title>
     <?php include("../../pages/includes/admin/head.php"); ?>
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+    <!-- End Leaflet -->
 </head>
 <body>
     <?php include("../../pages/includes/load.php"); ?>
@@ -70,7 +74,11 @@ include("../../classes/auth.php");
         <?php include("../../pages/includes/admin/footer.php"); ?>
     </div>
 
-    <?php include("../../pages/includes/modal/event.php"); ?>
+    <?php include("../../pages/includes/modal/location.php"); ?>
+    <!-- Script -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <!-- End Script -->
     <?php include("../../pages/includes/admin/script.php"); ?>
 </body>
 </html>
