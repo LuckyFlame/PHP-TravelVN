@@ -4,6 +4,6 @@
  * Set Time Out
  */
 
-setTimeout(function() {
+setTimeout(function () {
     $(".loader").fadeToggle();
 }, 2500);

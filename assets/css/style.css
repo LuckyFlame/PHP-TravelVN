@@ -28,11 +28,14 @@
     padding: 0;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
-img, picture {
+img,
+picture {
     max-width: 100%;
     object-fit: cover;
 }
@@ -212,7 +215,7 @@ form label.error {
 }
 
 .section-login .container form .field-flex {
-    display: flex; 
+    display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
@@ -425,10 +428,10 @@ form label.error {
 }
 
 .section-profile .img-circle img {
-	height: 100px;
-	width: 100px;
-	border-radius: 100%;
-	border: 5px solid var(--fc-white);
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    border: 5px solid var(--fc-white);
 }
 
 /* 
@@ -465,7 +468,7 @@ table {
 .map {
     width: 100%;
     height: 40vh;
-} 
+}
 
 /* 
  * Media
@@ -474,12 +477,15 @@ table {
  */
 
 @media (min-width: 1440px) {
-    .dataTables_scrollHeadInner, .table {
+
+    .dataTables_scrollHeadInner,
+    .table {
         width: 100% !important;
     }
 }
 
 @media (min-width: 1200px) {
+
     .section-profile .container,
     .section-event .container {
         padding-left: 0 !important;
@@ -488,6 +494,7 @@ table {
 }
 
 @media (min-width: 992px) {
+
     .section-event .advertise,
     .section-event .line-event {
         display: block;
@@ -495,11 +502,12 @@ table {
 }
 
 @media (min-width: 767.98px) {
+
     .section-profile .container,
     .section-event .container {
         max-width: 1200px;
     }
-} 
+}
 
 
 @media (max-width: 767.98px) {
@@ -520,7 +528,7 @@ table {
     .section-event .child-content .col-sm-6:nth-child(2) {
         padding-top: 10px;
         padding-bottom: 10px;
-    } 
+    }
 }
 
 @media (max-width: 425.98px) {

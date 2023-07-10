@@ -68,13 +68,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="../../pages/main/ad_tour" class="nav-link">
                         <i class="nav-icon bx bx-notepad"></i>
                         <p>Sản Phẩm</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="../../pages/main/ad_location" class="nav-link">
                         <i class="nav-icon bx bx-globe"></i>
                         <p>Khu Vực</p>
                     </a>

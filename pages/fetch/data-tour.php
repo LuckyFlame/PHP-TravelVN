@@ -1,13 +1,13 @@
 <?php 
 
 include("../../library/database.php");
-include("../../classes/event.php");
+include("../../classes/tour.php");
 
 // GetTotal
 function GetTotal() {
     $connect = connectPDO();
 
-    $statement = $connect->prepare("SELECT * FROM `event`");
+    $statement = $connect->prepare("SELECT * FROM `tour`");
     $statement->execute();
     $statement->fetchAll();
     
@@ -20,7 +20,7 @@ $connect = connectPDO();
 
 $query = '';
 $output = array();
-$query .= "SELECT * FROM `event` ";
+$query .= "SELECT * FROM `tour` ";
 
 if(isset($_POST["search"]["value"])) {
     $query .= 'WHERE title LIKE "%'.$_POST["search"]["value"].'%" ';
@@ -47,7 +47,7 @@ foreach($result as $row) {
     $sub_array = array();
     $sub_array[] = $row["id"];
     $sub_array[] = $row["title"];
-    $sub_array[] = $row["header"];
+    $sub_array[] = $row["price"];
 
     if($row["thumbnail"] != "") {
         $sub_array[] = "<img src='../../uploads/thumbnail/". $row["thumbnail"] ."' width='100' height='75'>";
@@ -59,14 +59,17 @@ foreach($result as $row) {
         }
     }
 
+    $sub_array[] = $row["days"];
+    $sub_array[] = $row["num_of_seat"];
+
     $sub_array[] = 
-        '<a class="btn btn-info text-white" data-id="'.$row["id"].'" id="edit-event">
+        '<a class="btn btn-info text-white" data-id="'.$row["id"].'" id="edit-tour">
             <i class="bx bx-edit-alt"></i>
         </a>
-        <a class="btn btn-danger text-white" data-id="'.$row["id"].'" id="delete-event">
+        <a class="btn btn-danger text-white" data-id="'.$row["id"].'" id="delete-tour">
             <i class="bx bx-trash"></i>
         </a>
-        <a class="btn btn-warning text-white" data-id="'.$row["id"].'" id="detail-event">
+        <a class="btn btn-warning text-white" data-id="'.$row["id"].'" id="detail-tour">
             <i class="bx bx-detail"></i>
         </a>'
         ;
